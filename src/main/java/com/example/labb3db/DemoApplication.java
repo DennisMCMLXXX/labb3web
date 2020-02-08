@@ -39,8 +39,8 @@ public class DemoApplication {
 //			DBManager.updateQuery(conn,
 //					"INSERT INTO ppl(id, name, profession) VALUES('Liselotte','Systemutvecklare / handledare');");
 //			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Kent','Linux tekniker');");
-			DBManager.updateQuery(conn, "DELETE FROM ppl"); // ta bort alla rader
 			String output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
+			DBManager.updateQuery(conn, "DELETE FROM ppl"); // ta bort alla rader
 			return output;
 
 		} catch (Exception e) {
