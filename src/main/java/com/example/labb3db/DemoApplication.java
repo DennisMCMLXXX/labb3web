@@ -39,7 +39,7 @@ public class DemoApplication {
             return modelAndView;
     }
 
-	@RequestMapping("/filewrite")
+    @RequestMapping("/filewrite")
     @ResponseBody
     String filewrite() {
         int nbr = 0;
@@ -61,5 +61,6 @@ public class DemoApplication {
         } catch (IOException e) {return e.getMessage();}
         return "Denna sida har laddats " + nbr + " gånger.";
     }
+
 
 }
