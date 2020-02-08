@@ -24,21 +24,21 @@ public class DemoApplication {
 		try {
 			Connection conn = DBManager.getConnection();
 			DBManager.updateQuery(conn,
-					"CREATE TABLE IF NOT EXISTS ppl (id SERIAL PRIMARY KEY, name varchar(45) NOT NULL, profession varchar(45) NOT NULL)");
-			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Dennis','Student')");
-			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('2', 'Dennis','Trainee')");
-			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('3', 'Dennis','Systemutvecklare')");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Bengt','IT-Aarkitekt');");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Calle','Systemutvecklare');");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Mona','Testare');");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Frida','Krav-analytiker');");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Solveig','Teamledare');");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Mikael','Enhetschef');");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Christina','General direktör');");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Jan','Överste direktör');");
+					"CREATE TABLE IF NOT EXISTS ppl (id int SERIAL PRIMARY KEY, name varchar(45) NOT NULL, profession varchar(45) NOT NULL)");
+			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Dennis', 'Student')");
+			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('2', 'Dennis', 'Trainee')");
+			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('3', 'Dennis', 'Systemutvecklare')");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Bengt', 'IT-Aarkitekt');");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Calle', 'Systemutvecklare');");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Mona', 'Testare');");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Frida', 'Krav-analytiker');");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Solveig', 'Teamledare');");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Mikael', 'Enhetschef');");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Christina', 'General direktör');");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Jan', 'Överste direktör');");
 //			DBManager.updateQuery(conn,
-//					"INSERT INTO ppl(id, name, profession) VALUES('Liselotte','Systemutvecklare / handledare');");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Kent','Linux tekniker');");
+//					"INSERT INTO ppl(id, name, profession) VALUES('Liselotte', 'Systemutvecklare / handledare');");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Kent', 'Linux tekniker');");
 			String output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
 			DBManager.updateQuery(conn, "DELETE FROM ppl"); // ta bort alla rader
 			return output;
