@@ -23,7 +23,26 @@ public class DemoApplication {
 	String connect() {
 		try {
 			Connection conn = DBManager.getConnection();
-			return "Success!";
+			DBManager.updateQuery(conn,
+					"CREATE TABLE IF NOT EXISTS ppl (id int NOT NULL AUTO_INCREMENT UNIQUE, name varchar(45) NOT NULL, profession varchar(45) NOT NULL, PRIMARY KEY (id) )");
+			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis','Student');");
+			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis','Trainee');");
+			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis','Systemutvecklare');");
+			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Bengt','IT-Aarkitekt');");
+			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Calle','Systemutvecklare');");
+			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Mona','Testare');");
+			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Frida','Krav-analytiker');");
+			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Solveig','Teamledare');");
+			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Mikael','Enhetschef');");
+			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Christina','General direktör');");
+			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Jan','Överste direktör');");
+			DBManager.updateQuery(conn,
+					"INSERT INTO ppl(name, profession) VALUES('Liselotte','Systemutvecklare / handledare');");
+			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Kent','Linux tekniker');");
+
+			String output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
+			return output;
+
 		} catch (Exception e) {
 			return e.getMessage();
 		}
@@ -36,32 +55,6 @@ public class DemoApplication {
 		modelAndView.setViewName("index");
 		System.out.println("Skriver till konsol...");
 		return modelAndView;
-	}
-
-	@RequestMapping("/filewrite")
-	@ResponseBody
-	String filewrite() {
-		int nbr = 0;
-		try {
-			File file = new File("counter.txt");
-			if (!file.exists()) {
-				file.createNewFile();
-			} else {
-				BufferedReader br = new BufferedReader(new FileReader(file));
-				String oldNbr = br.readLine();
-				nbr = Integer.parseInt(oldNbr);
-				br.close();
-			}
-			nbr++;
-			String newNbr = "" + nbr;
-			FileWriter fw = new FileWriter(file.getAbsoluteFile());
-			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(newNbr);
-			bw.close();
-		} catch (IOException e) {
-			return e.getMessage();
-		}
-		return "Denna sida har laddats " + nbr + " gånger.";
 	}
 
 	public static void main(String[] args) {
