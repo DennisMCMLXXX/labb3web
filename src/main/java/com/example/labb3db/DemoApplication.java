@@ -25,11 +25,6 @@ public class DemoApplication {
         } catch (Exception e) {return e.getMessage();}
     }
 
-	public static void main(String[] args) {
-
-		SpringApplication.run(DemoApplication.class, args);
-	}
-	
     @RequestMapping("/")
     @ResponseBody
         ModelAndView index() {
@@ -62,5 +57,8 @@ public class DemoApplication {
         return "Denna sida har laddats " + nbr + " gånger.";
     }
 
+	public static void main(String[] args) {
 
+		SpringApplication.run(DemoApplication.class, args);
+	}
 }
