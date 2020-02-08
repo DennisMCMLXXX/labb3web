@@ -12,6 +12,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -28,6 +29,16 @@ public class DemoApplication {
 
 		SpringApplication.run(DemoApplication.class, args);
 	}
+	
+    @RequestMapping("/")
+    @ResponseBody
+        ModelAndView index() {
+        ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("index");
+        System.out.println("Skriver till konsol...");
+            return modelAndView;
+    }
+
 	@RequestMapping("/filewrite")
     @ResponseBody
     String filewrite() {
