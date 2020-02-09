@@ -20,6 +20,12 @@ import org.springframework.web.servlet.ModelAndView;
 @SpringBootApplication
 public class DemoApplication {
 	
+	@RequestMapping("/alldb")
+	String alldb(Model model, ArrayList<User> output) {
+		model.addAttribute("users", output);
+		
+		return "db";
+	}
 	@RequestMapping("/db")
 //	@ResponseBody
 	String db(Model model) {
@@ -55,6 +61,7 @@ public class DemoApplication {
 			return e.getMessage();
 		}
 	}
+	
 	@GetMapping("/DBSearch")
 	public String DBSearch(Model model) {
 		model.addAttribute("DBSearch", new DBManager());
@@ -63,9 +70,11 @@ public class DemoApplication {
 
 	@PostMapping("/DBSearch")
 	public String DBSearchSubmit(@ModelAttribute DBManager search) throws IOException {
+		ArrayList<User> output = new ArrayList<User>();
+
 		System.out.println("title: " + search.getStr());
 //		return "db";
-		return "TMDBSearch_result";
+		return "db";
 	}
 	
 	@RequestMapping("/")
