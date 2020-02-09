@@ -54,6 +54,7 @@ public class DBManager {
 	}
 
 	public JSONArray getSearchStr() {
+		
 		return json;
 	}
 }
