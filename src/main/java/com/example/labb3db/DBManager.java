@@ -1,5 +1,6 @@
 package com.example.labb3db;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 public class DBManager {
 	
@@ -52,9 +54,15 @@ public class DBManager {
 		}
 		return out;
 	}
+	public void setSearchStr(String searchStr) throws IOException {
+		this.json = readJsonFromUrl(searchStr);
+	}
 
 	public JSONArray getSearchStr() {
-		
+		return json;
+	}
+	
+	public JSONArray readJsonFromUrl(String searchtext) throws IOException, JSONException {
 		return json;
 	}
 }
