@@ -1,7 +1,15 @@
 package com.example.labb3db;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.HttpURLConnection;
+import java.net.ProtocolException;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -11,6 +19,7 @@ import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class DBManager {
 	
@@ -63,6 +72,46 @@ public class DBManager {
 	}
 	
 	public JSONArray readJsonFromUrl(String searchtext) throws IOException, JSONException {
-		return json;
+		String API_KEY = "02cef8f4068d207f198396e97a22f72b";
+		String text = searchtext.replaceAll(" ", "+");
+
+		URL url = new URL("https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&query=" + text);
+
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+		try {
+			con.setDoOutput(true);
+			con.setRequestMethod("GET");
+			con.setRequestProperty("Content-Type", "application/json");
+		} catch (ProtocolException e) {
+			e.printStackTrace();
+		}
+
+		InputStream is = url.openStream();
+		try {
+			BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+			String jsonText = readAll(rd);
+			JSONObject json = new JSONObject(jsonText);
+
+			JSONArray arr = json.getJSONArray("results");
+
+			/**
+			 * här tar jag min jsonArray och hämtar tex "original_title"
+			 * Jag kunde inte jobba vidare med detta tyvärr, se rapport.
+			 */
+//			 System.out.println(jsonArray.getJSONArray("original_title"));
+
+			return arr;
+		} finally {
+			is.close();
+		}
+	}
+	private String readAll(Reader rd) throws IOException {
+		StringBuilder sb = new StringBuilder();
+		int cp;
+		while ((cp = rd.read()) != -1) {
+			sb.append((char) cp);
+		}
+		return sb.toString();
 	}
 }
