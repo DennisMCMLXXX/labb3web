@@ -1,10 +1,5 @@
 package com.example.labb3db;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -13,13 +8,17 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+
 @Controller
 @SpringBootApplication
 public class DemoApplication {
+	
 	@RequestMapping("/db")
 //	@ResponseBody
 	String db(Model model) {
@@ -56,12 +55,17 @@ public class DemoApplication {
 		}
 	}
 
+	@PostMapping("/DBSearch")
+	public String DBSearchSubmit(@ModelAttribute DBManager search) throws IOException {
+		System.out.println("title: " + search.getSearchStr());
+		return "db";
+	}
+	
 	@RequestMapping("/")
 	@ResponseBody
 	ModelAndView index() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("index");
-		System.out.println("Skriver till konsol...");
 		return modelAndView;
 	}
 

@@ -8,8 +8,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class DBManager {
+import org.json.JSONArray;
 
+public class DBManager {
+	
+	private JSONArray json;
+	
 	public static Connection getConnection() throws URISyntaxException, SQLException {
 		String dbUrl = System.getenv("JDBC_DATABASE_URL");
 		return DriverManager.getConnection(dbUrl);
@@ -47,5 +51,9 @@ public class DBManager {
 			out.add(usr);
 		}
 		return out;
+	}
+
+	public JSONArray getSearchStr() {
+		return json;
 	}
 }
