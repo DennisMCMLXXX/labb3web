@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Databaser med Spring Boot och Heroku</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Profession</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="user : ${users}">            <!-- OBS -->
+      <td th:text="${user.id}">&nbsp;</td>    <!-- OBS -->
+      <td th:text="${user.name}">&nbsp;</td>    <!-- OBS -->
+      <td th:text="${user.profession}">&nbsp;</td>    <!-- OBS -->
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

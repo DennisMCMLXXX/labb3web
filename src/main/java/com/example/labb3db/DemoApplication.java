@@ -7,10 +7,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,14 +22,16 @@ import org.springframework.web.servlet.ModelAndView;
 public class DemoApplication {
 	@RequestMapping("/db")
 	@ResponseBody
-	String connect() {
+	String db(Model model) {
+		ArrayList<User> output = new ArrayList<User>();
 		try {
 			Connection conn = DBManager.getConnection();
 			DBManager.updateQuery(conn,
 					"CREATE TABLE IF NOT EXISTS ppl (id int PRIMARY KEY, name varchar(45) NOT NULL, profession varchar(45) NOT NULL)");
 			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Dennis', 'Student')");
 			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('2', 'Dennis', 'Trainee')");
-			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('3', 'Dennis', 'Systemutvecklare')");
+			DBManager.updateQuery(conn,
+					"INSERT INTO ppl(id, name, profession) VALUES('3', 'Dennis', 'Systemutvecklare')");
 //			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Bengt', 'IT-Aarkitekt');");
 //			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Calle', 'Systemutvecklare');");
 //			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Mona', 'Testare');");
@@ -39,9 +43,14 @@ public class DemoApplication {
 //			DBManager.updateQuery(conn,
 //					"INSERT INTO ppl(id, name, profession) VALUES('Liselotte', 'Systemutvecklare / handledare');");
 //			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Kent', 'Linux tekniker');");
-			String output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
+//			String output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
+
+			output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
 			DBManager.updateQuery(conn, "DELETE FROM ppl"); // ta bort alla rader
-			return output;
+			model.addAttribute("user", output);
+			return "db";
+
+//			return output;
 
 		} catch (Exception e) {
 			return e.getMessage();
