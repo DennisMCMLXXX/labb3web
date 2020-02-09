@@ -44,7 +44,7 @@ public class DemoApplication {
 //			String output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
 
 			output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
-			DBManager.updateQuery(conn, "drop table ppl"); // ta bort alla rader
+//			DBManager.updateQuery(conn, "drop table ppl"); // ta bort alla rader
 			model.addAttribute("users", output);
 			return "db";
 
