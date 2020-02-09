@@ -57,7 +57,7 @@ public class DemoApplication {
 	}
 	@GetMapping("/DBSearch")
 	public String DBSearch(Model model) {
-		model.addAttribute("DBManager", new DBManager());
+		model.addAttribute("DBSearch", new DBManager());
 		return "search_form";
 	}
 
