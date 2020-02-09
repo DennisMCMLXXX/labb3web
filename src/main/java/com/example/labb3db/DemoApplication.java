@@ -47,7 +47,7 @@ public class DemoApplication {
 
 			output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
 			DBManager.updateQuery(conn, "DELETE FROM ppl"); // ta bort alla rader
-			model.addAttribute("user", output);
+			model.addAttribute("users", output);
 			return "db";
 
 //			return output;
