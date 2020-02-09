@@ -27,7 +27,7 @@ public class DemoApplication {
 		try {
 			Connection conn = DBManager.getConnection();
 			DBManager.updateQuery(conn,
-					"CREATE TABLE IF NOT EXISTS ppl (id INTEGER PRIMARY KEY, name TEXT, profession TEXT");
+					"CREATE TABLE IF NOT EXISTS ppl (id INTEGER PRIMARY KEY, name TEXT, profession TEXT)");
 			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES(DEFAULT, 'Dennis', 'Student')");
 //			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis', 'Trainee')");
 //			DBManager.updateQuery(conn,
