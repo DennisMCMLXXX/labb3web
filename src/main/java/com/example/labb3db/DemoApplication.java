@@ -27,11 +27,11 @@ public class DemoApplication {
 		try {
 			Connection conn = DBManager.getConnection();
 			DBManager.updateQuery(conn,
-					"CREATE TABLE IF NOT EXISTS ppl (id serial PRIMARY KEY, name varchar(45) NOT NULL, profession varchar(45) NOT NULL)");
-			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis', 'Student')");
-			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis', 'Trainee')");
-			DBManager.updateQuery(conn,
-					"INSERT INTO ppl(name, profession) VALUES('Dennis', 'Systemutvecklare')");
+					"CREATE TABLE IF NOT EXISTS ppl (id serial PRIMARY KEY, name varchar(45) NOT NULL, profession varchar(45) NOT NULL);");
+			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES(DEFAULT, 'Dennis', 'Student');");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis', 'Trainee')");
+//			DBManager.updateQuery(conn,
+//					"INSERT INTO ppl(name, profession) VALUES('Dennis', 'Systemutvecklare')");
 //			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Bengt', 'IT-Aarkitekt');");
 //			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Calle', 'Systemutvecklare');");
 //			DBManager.updateQuery(conn, "INSERT INTO ppl(id, name, profession) VALUES('1', 'Mona', 'Testare');");
