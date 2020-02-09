@@ -63,11 +63,11 @@ public class DBManager {
 		}
 		return out;
 	}
-	public void setSearchStr(String searchStr) throws IOException {
-		this.json = readJsonFromUrl(searchStr);
+	public void setStr(String str) throws IOException {
+		this.json = readJsonFromUrl(str);
 	}
 
-	public JSONArray getSearchStr() {
+	public JSONArray getStr() {
 		return json;
 	}
 	
