@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 @SpringBootApplication
 public class DemoApplication {
 	@RequestMapping("/db")
-	@ResponseBody
+//	@ResponseBody
 	String db(Model model) {
 		ArrayList<User> output = new ArrayList<User>();
 		try {
