@@ -7,7 +7,7 @@
 <body>
 	<h1>Sök</h1>
 	<form action="#" th:action="@{/DBSearch}" th:object="${DBSearch}"method="post">
-		<p>Input: <input type="text" th:field="*{searchstr}" /></p>
+		<p>Input: <input type="text" th:field="*{searchStr}" /></p>
 		<p><input type="submit" value="Submit" /> <input type="reset" value="Reset" />
 		</p>
 	</form>

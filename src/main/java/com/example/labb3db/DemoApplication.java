@@ -58,7 +58,8 @@ public class DemoApplication {
 	@PostMapping("/DBSearch")
 	public String DBSearchSubmit(@ModelAttribute DBManager search) throws IOException {
 		System.out.println("title: " + search.getSearchStr());
-		return "db";
+//		return "db";
+		return "TMDBSearch_result";
 	}
 	
 	@RequestMapping("/")
