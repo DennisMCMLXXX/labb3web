@@ -40,13 +40,11 @@ public class DBManager {
 	public JSONArray getDBAdd() {
 		return json;
 	}
-	public void setDDelete(String str) {
+	public void setDBDelete(String str) {
 		this.json = dbDelete(str);
 	}
-	
-	
 
-	public JSONArray getDelete() {
+	public JSONArray getDBDelete() {
 		return json;
 	}
 
@@ -88,6 +86,7 @@ public class DBManager {
 		}
 		return out;
 	}
+	
 	private JSONArray dbDelete(String str) {
 		// TODO Auto-generated method stub
 		return null;
