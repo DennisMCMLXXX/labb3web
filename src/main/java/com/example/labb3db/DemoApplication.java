@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.ws.rs.PathParam;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -56,6 +58,17 @@ public class DemoApplication {
 		} catch (Exception e) {
 			return e.getMessage();
 		}
+	}
+
+	@RequestMapping("/DBDelete/{id}")
+	String DBDeletes(Model model, @PathParam("idnumber") int idnumber) throws URISyntaxException, SQLException {
+		ArrayList<User> output = new ArrayList<User>();
+		Connection conn = DBManager.getConnection();
+		output = DBManager.selectQuery(conn, "SELECT * FROM ppl where ID=" + idnumber);
+		model.addAttribute("users", output);
+
+		model.addAttribute("DBDelete", new DBManager());
+		return "db";
 	}
 
 	@GetMapping("/DBDelete")
