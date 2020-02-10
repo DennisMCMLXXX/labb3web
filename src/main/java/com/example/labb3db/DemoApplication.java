@@ -64,7 +64,7 @@ public class DemoApplication {
 	String DBDeletes(Model model, @PathParam("id") String id) throws URISyntaxException, SQLException {
 		ArrayList<User> output = new ArrayList<User>();
 		Connection conn = DBManager.getConnection();
-		output = DBManager.selectQuery(conn, "SELECT * FROM ppl where id=" + id);
+		output = DBManager.selectQuery(conn, "SELECT * FROM ppl AND id=" + id);
 		model.addAttribute("users", output);
 
 		return "db";
