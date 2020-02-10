@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -80,7 +81,7 @@ public class DemoApplication {
 	}
 
 	@RequestMapping("/DBDeletes/{name}")
-	String DBDeletes(Model model, @PathParam("name") String name) throws URISyntaxException, SQLException {
+	String DBDeletes(Model model, @PathVariable("name") String name) throws URISyntaxException, SQLException {
 		ArrayList<User> output = new ArrayList<User>();
 		Connection conn = DBManager.getConnection();
 		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE Name='" + name + "'");
