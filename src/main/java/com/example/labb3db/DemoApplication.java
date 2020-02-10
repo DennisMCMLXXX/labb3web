@@ -60,7 +60,7 @@ public class DemoApplication {
 		}
 	}
 
-	@GetMapping("/DBDelete/{name}")
+	@RequestMapping("/DBDeletes/{name}")
 	String DBDeletes(Model model, @PathParam("name") String name) throws URISyntaxException, SQLException {
 		ArrayList<User> output = new ArrayList<User>();
 		Connection conn = DBManager.getConnection();
