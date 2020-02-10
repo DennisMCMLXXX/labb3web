@@ -20,9 +20,9 @@ public class UserService {
 	SQLTransporter sqlHandler = new SQLTransporter();
 
 //	@GET
-//	@Path("/users")
-//	@Produces(MediaType.APPLICATION_JSON)
-	@GetMapping("/users")
+	@GetMapping
+	@Path("/users")
+	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getUsers() throws SQLException, URISyntaxException {
 		String dBName = "labb2";
 //		Processor.createDatabase(dBName);
