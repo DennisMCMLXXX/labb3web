@@ -60,11 +60,11 @@ public class DemoApplication {
 		}
 	}
 
-	@RequestMapping("/DBDelete/{id}")
-	String DBDeletes(Model model, @PathParam("id") String id) throws URISyntaxException, SQLException {
+	@RequestMapping("/DBDelete/{name}")
+	String DBDeletes(Model model, @PathParam("name") String name) throws URISyntaxException, SQLException {
 		ArrayList<User> output = new ArrayList<User>();
 		Connection conn = DBManager.getConnection();
-		output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
+		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE Name=" + name);
 		model.addAttribute("users", output);
 
 		return "db";
