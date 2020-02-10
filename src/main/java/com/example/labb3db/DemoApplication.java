@@ -26,7 +26,7 @@ public class DemoApplication {
 	String db(Model model) {
 		ArrayList<User> output = new ArrayList<User>();
 		try {
-//			Connection conn = DBManager.getConnection();
+			Connection conn = DBManager.getConnection();
 //			DBManager.updateQuery(conn,
 //					"CREATE TABLE IF NOT EXISTS ppl (id SERIAL PRIMARY KEY, name TEXT NOT NULL, profession TEXT NOT NULL)");
 //			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis', 'Student')");
@@ -44,7 +44,7 @@ public class DemoApplication {
 //					"INSERT INTO ppl(name, profession) VALUES('Liselotte', 'Systemutvecklare / handledare');");
 //			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Kent', 'Linux tekniker');");
 //			String output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
-//			output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
+			output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
 //			output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
 
 //			DBManager.updateQuery(conn, "drop table ppl"); // ta bort alla rader
