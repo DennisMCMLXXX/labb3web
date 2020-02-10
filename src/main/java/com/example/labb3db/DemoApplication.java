@@ -66,7 +66,7 @@ public class DemoApplication {
 	
 	@PostMapping("/DBDelete")
 	public String DBDeleteSubmit(@ModelAttribute DBManager search) throws IOException {
-		System.out.println("title: " + search.getDBDelete());
+		System.out.println(search.getDBDelete());
 		return "db";
 	}
 	@GetMapping("/DBAdd")
@@ -77,7 +77,7 @@ public class DemoApplication {
 
 	@PostMapping("/DBAdd")
 	public String DBAddSubmit(@ModelAttribute DBManager search) throws IOException {
-		System.out.println("title: " + search.getStr());
+		System.out.println(search.getStr());
 		return "db";
 	}
 
@@ -89,7 +89,7 @@ public class DemoApplication {
 
 	@PostMapping("/DBSearch")
 	public String DBSearchSubmit(@ModelAttribute DBManager search) throws IOException {
-		System.out.println("title: " + search.getStr());
+		System.out.println(search.getStr());
 		return "db";
 	}
 

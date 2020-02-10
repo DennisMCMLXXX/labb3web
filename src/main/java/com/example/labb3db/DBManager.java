@@ -25,9 +25,9 @@ public class DBManager {
 
 	private JSONArray json;
 
-//	public void setStr(String str) throws IOException {
-//		this.json = readJsonFromUrl(str);
-//	}
+	public void setStr(String str) throws IOException {
+		this.json = readJsonFromUrl(str);
+	}
 
 	public JSONArray getStr() {
 		return json;
@@ -40,8 +40,8 @@ public class DBManager {
 	public JSONArray getDBAdd() {
 		return json;
 	}
-	public void setDBDelete(String str) {
-		this.json = dbDelete(str);
+	public void setDBDelete(String DBDelete) {
+		this.json = dbDelete(DBDelete);
 	}
 
 	public JSONArray getDBDelete() {
