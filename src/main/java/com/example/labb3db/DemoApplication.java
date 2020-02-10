@@ -65,8 +65,8 @@ public class DemoApplication {
 		}
 	}
 	
-	@Path("/test/{name}")
-	@GET
+	@RequestMapping("/test/{name}")
+//	@GET
 	public Response test(@PathParam("name") String name) throws SQLException, URISyntaxException {
 		ArrayList<User> output = new ArrayList<User>();
 		Connection conn = DBManager.getConnection();
