@@ -60,7 +60,7 @@ public class DemoApplication {
 
 	@GetMapping("/DBDelete")
 	String DBDelete(Model model) throws URISyntaxException, SQLException {
-		model.addAttribute("DBSearch", new DBManager());
+		model.addAttribute("DBDelete", new DBManager());
 		return "delete_form";
 	}
 	
@@ -71,7 +71,7 @@ public class DemoApplication {
 	}
 	@GetMapping("/DBAdd")
 	String alldb(Model model) throws URISyntaxException, SQLException {
-		model.addAttribute("DBSearch", new DBManager());
+		model.addAttribute("DBAdd", new DBManager());
 		return "add_form";
 	}
 
