@@ -68,14 +68,6 @@ public class DemoApplication {
 	public String DBDeleteSubmit(@ModelAttribute DBManager search)
 			throws IOException, URISyntaxException, SQLException {
 		System.out.println(search.getDBDelete());
-		ArrayList<User> output = new ArrayList<User>();
-		Connection conn = DBManager.getConnection();
-		Model model = null;
-
-		output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
-		model.addAttribute("users", output);
-		db(model);
-
 		return "db";
 	}
 
