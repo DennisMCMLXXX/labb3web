@@ -10,6 +10,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.web.bind.annotation.GetMapping;
+
 import com.example.labb3db.User;
 
 @Path("/UserService")
@@ -17,9 +19,10 @@ import com.example.labb3db.User;
 public class UserService {
 	SQLTransporter sqlHandler = new SQLTransporter();
 
-	@GET
-	@Path("/users")
-	@Produces(MediaType.APPLICATION_JSON)
+//	@GET
+//	@Path("/users")
+//	@Produces(MediaType.APPLICATION_JSON)
+	@GetMapping("/users")
 	public List<User> getUsers() throws SQLException, URISyntaxException {
 		String dBName = "labb2";
 //		Processor.createDatabase(dBName);
