@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.labb3db.User;
 
@@ -20,8 +21,8 @@ public class UserService {
 	SQLTransporter sqlHandler = new SQLTransporter();
 
 //	@GET
-	@GetMapping
-	@Path("/users")
+//	@Path("/users")
+	@RequestMapping("/users")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getUsers() throws SQLException, URISyntaxException {
 		String dBName = "labb2";
