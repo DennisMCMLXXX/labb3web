@@ -5,6 +5,13 @@ import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,9 +24,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.db.Processor;
+import com.example.db.SQLTransporter;
+
 @Controller
 @SpringBootApplication
 public class DemoApplication {
+	SQLTransporter sqlHandler = new SQLTransporter();
+	
+	@GET
+	@Path("/users")
+	@Produces(MediaType.APPLICATION_XML)
+	public List<User> getUsers() throws SQLException, URISyntaxException {
+		String dBName = "labb2";
+//		Processor.createDatabase(dBName);
+		if (sqlHandler.getUsers(dBName)) {
+			return Processor.getUserList();
+		}
+		return null;
+	}
+
+	@GET
+	@Path("/users/{idnumber}")
+	@Produces(MediaType.APPLICATION_XML)
+	public List<User> getUserByidnumber(@PathParam("idnumber") int idnumber) throws SQLException, URISyntaxException {
+		String dBName = "labb2";
+		if (sqlHandler.getUsers(dBName, idnumber)) {
+			return Processor.getUserList();
+		}
+		return null;
+	}
 
 	@RequestMapping("/db")
 //	@ResponseBody
