@@ -7,8 +7,8 @@
 <body>
 	<h1>Add person</h1>
 	<form action="#" th:action="@{/DBAdd}" th:object="${DBAdd}"method="post">
-		<p>Name: <input type="text" th:field="*{str}" /></p>
-		<p>Profession: <input type="text" th:field="*{str}" /></p>
+		<p>Name: <input type="text" th:field="*{DBAddName}" /></p>
+		<p>Profession: <input type="text" th:field="*{DBAddProfession}" /></p>
 		<p><input type="submit" value="Submit" /> <input type="reset" value="Reset" />
 		</p>
 	</form>
