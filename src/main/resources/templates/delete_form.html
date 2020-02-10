@@ -5,9 +5,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Sök</h1>
+	<h1>Delete by id</h1>
 	<form action="#" th:action="@{/DBDelete}" th:object="${DBDelete}"method="post">
-		<p>Input: <input type="text" th:field="*{str}" /></p>
+		<p>Id: <input type="text" th:field="*{dbdelete}" /></p>
 		<p><input type="submit" value="Submit" /> <input type="reset" value="Reset" />
 		</p>
 	</form>

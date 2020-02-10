@@ -40,6 +40,15 @@ public class DBManager {
 	public JSONArray getDBAdd() {
 		return json;
 	}
+	public void setDDelete(String str) {
+		this.json = dbDelete(str);
+	}
+	
+	
+
+	public JSONArray getDelete() {
+		return json;
+	}
 
 	public static Connection getConnection() throws URISyntaxException, SQLException {
 		String dbUrl = System.getenv("JDBC_DATABASE_URL");
@@ -78,6 +87,10 @@ public class DBManager {
 			out.add(usr);
 		}
 		return out;
+	}
+	private JSONArray dbDelete(String str) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	private JSONArray dbAdd(String str) {
