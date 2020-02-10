@@ -6,7 +6,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.CacheControl;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -58,6 +63,20 @@ public class DemoApplication {
 		} catch (Exception e) {
 			return e.getMessage();
 		}
+	}
+	
+	@Path("/test/{name}")
+	@GET
+	public Response test(@PathParam("name") String name) throws SQLException, URISyntaxException {
+		ArrayList<User> output = new ArrayList<User>();
+		Connection conn = DBManager.getConnection();
+//		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE Name='" + name + "'");
+		output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
+
+	  
+		ResponseBuilder builder = Response.ok(output);
+	    
+	    return builder.build();
 	}
 
 	@RequestMapping("/DBDeletes/{name}")
