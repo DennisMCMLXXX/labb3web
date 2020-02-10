@@ -1,10 +1,5 @@
 package com.example.labb3db;
 
-import java.io.Serializable;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
 public class User {
 	private int id;
 	private String name;

@@ -19,7 +19,7 @@ public class UserService {
 
 	@GET
 	@Path("/users")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getUsers() throws SQLException, URISyntaxException {
 		String dBName = "labb2";
 //		Processor.createDatabase(dBName);
@@ -31,7 +31,7 @@ public class UserService {
 
 	@GET
 	@Path("/users/{idnumber}")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getUserByidnumber(@PathParam("idnumber") int idnumber) throws SQLException, URISyntaxException {
 		String dBName = "labb2";
 		if (sqlHandler.getUsers(dBName, idnumber)) {
