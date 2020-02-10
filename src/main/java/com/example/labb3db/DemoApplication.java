@@ -66,7 +66,7 @@ public class DemoApplication {
 	
 	@PostMapping("/DBDelete")
 	public String DBDeleteSubmit(@ModelAttribute DBManager search) throws IOException {
-		System.out.println("title: " + search.getStr());
+		System.out.println("title: " + search.getDBDelete());
 		return "db";
 	}
 	@GetMapping("/DBAdd")
