@@ -23,10 +23,10 @@ public class DemoApplication {
 
 	@RequestMapping("/db")
 //	@ResponseBody
-	String db(Model model, final String query) {
+	String db(Model model) {
 		ArrayList<User> output = new ArrayList<User>();
 		try {
-			Connection conn = DBManager.getConnection();
+//			Connection conn = DBManager.getConnection();
 //			DBManager.updateQuery(conn,
 //					"CREATE TABLE IF NOT EXISTS ppl (id SERIAL PRIMARY KEY, name TEXT NOT NULL, profession TEXT NOT NULL)");
 //			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis', 'Student')");
@@ -45,7 +45,7 @@ public class DemoApplication {
 //			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Kent', 'Linux tekniker');");
 //			String output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
 //			output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
-			output = DBManager.selectQuery(conn, query);
+//			output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
 
 //			DBManager.updateQuery(conn, "drop table ppl"); // ta bort alla rader
 			model.addAttribute("users", output);
@@ -63,12 +63,22 @@ public class DemoApplication {
 		model.addAttribute("DBDelete", new DBManager());
 		return "delete_form";
 	}
-	
+
 	@PostMapping("/DBDelete")
-	public String DBDeleteSubmit(@ModelAttribute DBManager search) throws IOException {
+	public String DBDeleteSubmit(@ModelAttribute DBManager search)
+			throws IOException, URISyntaxException, SQLException {
 		System.out.println(search.getDBDelete());
+		ArrayList<User> output = new ArrayList<User>();
+		Connection conn = DBManager.getConnection();
+		Model model = null;
+
+		output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
+		model.addAttribute("users", output);
+		db(model);
+
 		return "db";
 	}
+
 	@GetMapping("/DBAdd")
 	String alldb(Model model) throws URISyntaxException, SQLException {
 		model.addAttribute("DBAdd", new DBManager());
@@ -77,7 +87,7 @@ public class DemoApplication {
 
 	@PostMapping("/DBAdd")
 	public String DBAddSubmit(@ModelAttribute DBManager search) throws IOException {
-		System.out.println(search.getStr());
+		System.out.println(search.getJson());
 		return "db";
 	}
 
@@ -89,7 +99,7 @@ public class DemoApplication {
 
 	@PostMapping("/DBSearch")
 	public String DBSearchSubmit(@ModelAttribute DBManager search) throws IOException {
-		System.out.println(search.getStr());
+		System.out.println(search.getJson());
 		return "db";
 	}
 

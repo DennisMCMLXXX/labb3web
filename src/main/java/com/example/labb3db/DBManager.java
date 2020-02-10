@@ -29,11 +29,15 @@ public class DBManager {
 		this.json = readJsonFromUrl(str);
 	}
 
-	public JSONArray getStr() {
+	public JSONArray getJson() {
 		return json;
 	}
 
-	public void setDBAdd(String str) {
+	public void setDBAddName(String str) {
+		this.json = dbAdd(str);
+	}
+
+	public void setDBAddProfession(String str) {
 		this.json = dbAdd(str);
 	}
 
