@@ -22,9 +22,25 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class DBManager {
-	
+
 	private JSONArray json;
-	
+
+	public void setStr(String str) throws IOException {
+		this.json = readJsonFromUrl(str);
+	}
+
+	public JSONArray getStr() {
+		return json;
+	}
+
+	public void setDBAdd(String str) {
+		this.json = dbAdd(str);
+	}
+
+	public JSONArray getDBAdd() {
+		return json;
+	}
+
 	public static Connection getConnection() throws URISyntaxException, SQLException {
 		String dbUrl = System.getenv("JDBC_DATABASE_URL");
 		return DriverManager.getConnection(dbUrl);
@@ -63,14 +79,12 @@ public class DBManager {
 		}
 		return out;
 	}
-	public void setStr(String str) throws IOException {
-		this.json = readJsonFromUrl(str);
+
+	private JSONArray dbAdd(String str) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public JSONArray getStr() {
-		return json;
-	}
-	
 	public JSONArray readJsonFromUrl(String searchtext) throws IOException, JSONException {
 		String API_KEY = "02cef8f4068d207f198396e97a22f72b";
 		String text = searchtext.replaceAll(" ", "+");
@@ -96,8 +110,8 @@ public class DBManager {
 			JSONArray arr = json.getJSONArray("results");
 
 			/**
-			 * här tar jag min jsonArray och hämtar tex "original_title"
-			 * Jag kunde inte jobba vidare med detta tyvärr, se rapport.
+			 * här tar jag min jsonArray och hämtar tex "original_title" Jag kunde inte
+			 * jobba vidare med detta tyvärr, se rapport.
 			 */
 //			 System.out.println(jsonArray.getJSONArray("original_title"));
 
@@ -106,6 +120,7 @@ public class DBManager {
 			is.close();
 		}
 	}
+
 	private String readAll(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
 		int cp;
