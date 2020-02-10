@@ -40,8 +40,8 @@ public class DBManager {
 	public JSONArray getDBAdd() {
 		return json;
 	}
-	public void setDBDelete(String DBDelete) {
-		this.json = dbDelete(DBDelete);
+	public void setDBDelete(String str) {
+		this.json = dbDelete(str);
 	}
 
 	public JSONArray getDBDelete() {
