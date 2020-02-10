@@ -25,9 +25,9 @@ public class DBManager {
 
 	private JSONArray json;
 
-	public void setStr(String str) throws IOException {
-		this.json = readJsonFromUrl(str);
-	}
+//	public void setStr(String str) throws IOException {
+//		this.json = readJsonFromUrl(str);
+//	}
 
 	public JSONArray getStr() {
 		return json;
