@@ -23,6 +23,8 @@ import com.example.labb3db.DBManager;
 import com.example.labb3db.User;
 
 //@Path("/DB")
+@Controller
+@SpringBootApplication
 @RestController
 @RequestMapping("/DB")
 public class UserService {
