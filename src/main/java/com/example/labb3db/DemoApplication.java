@@ -109,7 +109,7 @@ public class DemoApplication {
 		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE Name='" + name + "'");
 		model.addAttribute("users", output);
 
-		return "db";
+		return "db_plain";
 	}
 
 	@GetMapping("/DBDelete")
