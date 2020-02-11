@@ -17,14 +17,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.labb3db.DBManager;
 import com.example.labb3db.User;
 
-@Path("/DB")
-@Controller
-@SpringBootApplication
-//@RequestMapping("/DB")
+//@Path("/DB")
+@RestController
+@RequestMapping("/DB")
 public class UserService {
 	SQLTransporter sqlHandler = new SQLTransporter();
 
