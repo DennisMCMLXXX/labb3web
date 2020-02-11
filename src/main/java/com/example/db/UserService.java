@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.labb3db.DBManager;
 import com.example.labb3db.User;
 
-//@Path("/DB")
+@Path("/DB")
 @Controller
 @SpringBootApplication
 @RestController
