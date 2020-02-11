@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.labb3db.DBManager;
 import com.example.labb3db.User;
 
-//@Path("/UserService")
+@Path("/DB")
 @Controller
 @SpringBootApplication
-@RequestMapping("/DB")
+//@RequestMapping("/DB")
 public class UserService {
 	SQLTransporter sqlHandler = new SQLTransporter();
 
