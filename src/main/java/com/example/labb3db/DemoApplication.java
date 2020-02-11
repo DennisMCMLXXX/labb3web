@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -26,9 +27,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.db.Processor;
+import com.example.db.SQLTransporter;
+
 @Controller
 @SpringBootApplication
 public class DemoApplication {
+	SQLTransporter sqlHandler = new SQLTransporter();
 
 	@RequestMapping("/db")
 //	@ResponseBody
@@ -84,20 +89,20 @@ public class DemoApplication {
 			method = RequestMethod.GET,
 			produces = { "application/json" } )
 	@ResponseBody
-//	public List<User> getUsers() throws SQLException, URISyntaxException {
-//		String dBName = "labb2";
-////		Processor.createDatabase(dBName);
-//		if (sqlHandler.getUsers(dBName)) {
-//			return Processor.getUserList();
-//		}
-//		return null;
-	String DBDeletes(Model model) throws URISyntaxException, SQLException {
-		ArrayList<User> output = new ArrayList<User>();
-		Connection conn = DBManager.getConnection();
-		output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
-		model.addAttribute("users", output);
-
-		return "db";
+	public List<User> getUsers() throws SQLException, URISyntaxException {
+		String dBName = "labb2";
+//		Processor.createDatabase(dBName);
+		if (sqlHandler.getUsers(dBName)) {
+			return Processor.getUserList();
+		}
+		return null;
+//	String DBDeletes(Model model) throws URISyntaxException, SQLException {
+//		ArrayList<User> output = new ArrayList<User>();
+//		Connection conn = DBManager.getConnection();
+//		output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
+//		model.addAttribute("users", output);
+//
+//		return "db";
 	}
 
 	@RequestMapping("/DBDeletes/{name}")
