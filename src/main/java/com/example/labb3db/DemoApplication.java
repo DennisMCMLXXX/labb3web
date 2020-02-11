@@ -86,20 +86,20 @@ public class DemoApplication {
 	}
 	@RequestMapping("/users")
 	@ResponseBody
-	public List<User> getUsers() throws SQLException, URISyntaxException {
-		String dBName = "labb2";
-//		Processor.createDatabase(dBName);
-		if (sqlHandler.getUsers(dBName)) {
-			return Processor.getUserList();
-		}
-		return null;
-//	String DBDeletes(Model model) throws URISyntaxException, SQLException {
-//		ArrayList<User> output = new ArrayList<User>();
-//		Connection conn = DBManager.getConnection();
-//		output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
-//		model.addAttribute("users", output);
-//
-//		return "db";
+//	public List<User> getUsers() throws SQLException, URISyntaxException {
+//		String dBName = "labb2";
+////		Processor.createDatabase(dBName);
+//		if (sqlHandler.getUsers(dBName)) {
+//			return Processor.getUserList();
+//		}
+//		return null;
+	String DBDeletes(Model model) throws URISyntaxException, SQLException {
+		ArrayList<User> output = new ArrayList<User>();
+		Connection conn = DBManager.getConnection();
+		output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
+		model.addAttribute("users", output);
+
+		return "db";
 	}
 
 	@RequestMapping("/DBDeletes/{name}")
