@@ -29,27 +29,36 @@ public class UserService {
 
 //	@GET
 //	@Path("/users")
-	@RequestMapping(
-			value = "/users",
-			method = RequestMethod.GET,
-			produces = { "application/json" } )
-	@ResponseBody
-//	public List<User> getUsers() throws SQLException, URISyntaxException {
-//		String dBName = "labb2";
-////		Processor.createDatabase(dBName);
-//		if (sqlHandler.getUsers(dBName)) {
-//			return Processor.getUserList();
-//		}
-//		return null;
-	String DBDeletes(Model model) throws URISyntaxException, SQLException {
+//	@RequestMapping(
+//			value = "/users",
+//			method = RequestMethod.GET,
+//			produces = { "application/json" } )
+//	@ResponseBody
+////	public List<User> getUsers() throws SQLException, URISyntaxException {
+////		String dBName = "labb2";
+//////		Processor.createDatabase(dBName);
+////		if (sqlHandler.getUsers(dBName)) {
+////			return Processor.getUserList();
+////		}
+////		return null;
+//	String DBDeletes(Model model) throws URISyntaxException, SQLException {
+//		ArrayList<User> output = new ArrayList<User>();
+//		Connection conn = DBManager.getConnection();
+//		output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
+//		model.addAttribute("users", output);
+//
+//		return "db";
+//	
+//}
+	@RequestMapping("/DBDeletes/{name}")
+	String DBDeletes(Model model, @PathVariable("name") String name) throws URISyntaxException, SQLException {
 		ArrayList<User> output = new ArrayList<User>();
 		Connection conn = DBManager.getConnection();
-		output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
+		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE Name='" + name + "'");
 		model.addAttribute("users", output);
 
-		return "db";
-	
-}
+		return "db_plain";
+	}
 
 	@GET
 	@Path("/users/{idnumber}")
