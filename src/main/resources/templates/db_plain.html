@@ -1,19 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Databas</title>
-<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-<table>
-  <tbody>
-    <tr th:each="user : ${users}">            
+     <ppl th:each="user : ${users}">            
       <id th:text="${user.id}"></id>    
       <name th:text="${user.name}"></name>    
       <profession th:text="${user.profession}"></profession> 
-    </tr>
-  </tbody>
-</table>
-</body>
-</html>
+    </ppl>
