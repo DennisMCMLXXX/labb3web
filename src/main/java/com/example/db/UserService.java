@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.labb3db.DBManager;
 import com.example.labb3db.User;
 
-@Path("/UserService")
+//@Path("/UserService")
 
 public class UserService {
 	SQLTransporter sqlHandler = new SQLTransporter();

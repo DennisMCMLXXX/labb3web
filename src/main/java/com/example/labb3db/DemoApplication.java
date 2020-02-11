@@ -84,10 +84,7 @@ public class DemoApplication {
 	    
 	    return builder.build();
 	}
-	@RequestMapping(
-			value = "/users",
-			method = RequestMethod.GET,
-			produces = { "application/json" } )
+	@RequestMapping("/users")
 	@ResponseBody
 	public List<User> getUsers() throws SQLException, URISyntaxException {
 		String dBName = "labb2";
