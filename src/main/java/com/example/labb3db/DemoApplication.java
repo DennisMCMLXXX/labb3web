@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -77,6 +78,26 @@ public class DemoApplication {
 		ResponseBuilder builder = Response.ok(output);
 	    
 	    return builder.build();
+	}
+	@RequestMapping(
+			value = "/users",
+			method = RequestMethod.GET,
+			produces = { "application/json" } )
+	@ResponseBody
+//	public List<User> getUsers() throws SQLException, URISyntaxException {
+//		String dBName = "labb2";
+////		Processor.createDatabase(dBName);
+//		if (sqlHandler.getUsers(dBName)) {
+//			return Processor.getUserList();
+//		}
+//		return null;
+	String DBDeletes(Model model) throws URISyntaxException, SQLException {
+		ArrayList<User> output = new ArrayList<User>();
+		Connection conn = DBManager.getConnection();
+		output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
+		model.addAttribute("users", output);
+
+		return "db";
 	}
 
 	@RequestMapping("/DBDeletes/{name}")
