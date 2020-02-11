@@ -85,7 +85,7 @@ public class DemoApplication {
 	    return builder.build();
 	}
 	@RequestMapping("/users")
-	@ResponseBody
+//	@ResponseBody
 //	public List<User> getUsers() throws SQLException, URISyntaxException {
 //		String dBName = "labb2";
 ////		Processor.createDatabase(dBName);
