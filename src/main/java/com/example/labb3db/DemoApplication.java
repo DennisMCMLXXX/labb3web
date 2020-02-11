@@ -10,7 +10,9 @@ import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.CacheControl;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
@@ -102,16 +104,25 @@ public class DemoApplication {
 		return "db";
 	}
 
-//	@RequestMapping("/DBDeletes/{name}")
-//	String DBDeletes(Model model, @PathVariable("name") String name) throws URISyntaxException, SQLException {
-//		ArrayList<User> output = new ArrayList<User>();
-//		Connection conn = DBManager.getConnection();
-//		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE Name='" + name + "'");
-//		model.addAttribute("users", output);
-//
-//		return "db_plain";
-//	}
+	@RequestMapping("/DBDeletes/{name}")
+	String DBDeletes(Model model, @PathVariable("name") String name) throws URISyntaxException, SQLException {
+		ArrayList<User> output = new ArrayList<User>();
+		Connection conn = DBManager.getConnection();
+		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE Name='" + name + "'");
+		model.addAttribute("users", output);
 
+		return "db_plain";
+	}
+	@GET
+	@Path("/users/{idnumber}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<User> getUserByidnumber(@PathParam("idnumber") int idnumber) throws SQLException, URISyntaxException {
+		String dBName = "labb2";
+		if (sqlHandler.getUsers(dBName, idnumber)) {
+			return Processor.getUserList();
+		}
+		return null;
+	}
 	@GetMapping("/DBDelete")
 	String DBDelete(Model model) throws URISyntaxException, SQLException {
 		model.addAttribute("DBDelete", new DBManager());
