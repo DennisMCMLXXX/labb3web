@@ -24,6 +24,7 @@ import com.example.labb3db.User;
 //@Path("/UserService")
 @Controller
 @SpringBootApplication
+@RequestMapping("/DB")
 public class UserService {
 	SQLTransporter sqlHandler = new SQLTransporter();
 
