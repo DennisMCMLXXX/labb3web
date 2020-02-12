@@ -74,20 +74,21 @@ public class UserService {
 		return "db_plain";
 	}
 	
-	@GET
-	@Path("/users/{idnumber}")
-	@Produces(MediaType.APPLICATION_JSON)
-	String getUserByidnumber(Model model, @PathVariable("idnumber") int idnumber) throws SQLException, URISyntaxException {
-//		String dBName = "labb2";
-//		if (sqlHandler.getUsers(dBName, idnumber)) {
-//			return Processor.getUserList();
-//		}
-//		return null;
-		ArrayList<User> output = new ArrayList<User>();
-		Connection conn = DBManager.getConnection();
-		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE id='" + idnumber + "'");
-		model.addAttribute("users", output);
-		return "db_plain";
+//	@GET
+//	@Path("/users/{idnumber}")
+//	@Produces(MediaType.APPLICATION_JSON)
+	@RequestMapping("/users/{idnumber}")
+	List<User> getUserByidnumber(Model model, @PathVariable("idnumber") int idnumber) throws SQLException, URISyntaxException {
+		String dBName = "labb2";
+		if (sqlHandler.getUsers(dBName, idnumber)) {
+			return Processor.getUserList();
+		}
+		return null;
+//		ArrayList<User> output = new ArrayList<User>();
+//		Connection conn = DBManager.getConnection();
+//		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE id='" + idnumber + "'");
+//		model.addAttribute("users", output);
+//		return "db_plain";
 	}
 	/**
 	 * kunde inte använda mig av denna tjänst för jag fick felmeddelande att denna
