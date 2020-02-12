@@ -64,7 +64,8 @@ public class UserService {
 		return "db_plain";
 	}
 
-	@GetMapping(value="/user/{id}", produces = MediaType.APPLICATION_JSON)
+	@GetMapping("/user/{id}")
+	@Produces (MediaType.APPLICATION_JSON)
 	String getUserByid(Model model, @PathVariable("id") int id) throws SQLException, URISyntaxException {
 		ArrayList<User> output = new ArrayList<User>();
 		Connection conn = DBManager.getConnection();
