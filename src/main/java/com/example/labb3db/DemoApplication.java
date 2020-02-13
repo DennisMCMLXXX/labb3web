@@ -46,9 +46,10 @@ public class DemoApplication {
 	
 	@GetMapping(path = "/{id}")
 //	@Produces(MediaType.TEXT_PLAIN)
-	public Response getUserByidnumber2(@PathVariable("id") int id) throws SQLException, URISyntaxException {
+	public User getUserByidnumber2(@PathVariable("id") int id) throws SQLException, URISyntaxException {
 		if (proceccor.getUsers(id)) {
-			return (Response) Processor.getUserList();
+//			return Processor.getUserList();
+			return Processor.getUserList2();
 		}
 		return null;
 	}

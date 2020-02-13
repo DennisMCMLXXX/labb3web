@@ -21,9 +21,14 @@ public class Processor {
 	}
 
 	private static List<User> userList = null;
+	private static User user2 = null;
 
 	public static void setUserList(List<User> users) {
 		userList = new ArrayList<User>(users);
+	}
+
+	public static User getUserList2() {
+		return user2;
 	}
 
 	public static List<User> getUserList() {
@@ -46,6 +51,24 @@ public class Processor {
 		Statement statement = connection.createStatement();
 		statement.executeUpdate("USE " + dBName + ";");
 		return statement;
+	}
+
+	private boolean getUsersFromDB2(Statement statement) throws SQLException {
+		List<User> userList = new ArrayList<User>();
+		ResultSet resultSet;
+		resultSet = statement.getResultSet();
+
+		while (resultSet.next()) {
+			int id = resultSet.getInt("id");
+			String name = resultSet.getString("name");
+			String proffesion = resultSet.getString("profession");
+			User user = new User(id, name, proffesion);
+			userList.add(user);
+		user = user2;
+		}
+		
+		Processor.setUserList(userList);
+		return true;
 	}
 
 	private boolean getUsersFromDB(Statement statement) throws SQLException {
