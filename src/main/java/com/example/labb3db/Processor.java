@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
+
 import com.example.db.DBManager;
 import com.example.entity.User;
 
@@ -19,6 +21,8 @@ public class Processor {
 
 		return output;
 	}
+	private static JSONObject object = null;;
+	
 
 	private static List<User> userList = null;
 	private static User user2 = null;
@@ -27,6 +31,9 @@ public class Processor {
 		userList = new ArrayList<User>(users);
 	}
 
+	public static JSONObject getUserList3() {
+		return object;
+	}
 	public static User getUserList2() {
 		return user2;
 	}
@@ -57,13 +64,16 @@ public class Processor {
 		List<User> userList = new ArrayList<User>();
 		ResultSet resultSet;
 		resultSet = statement.getResultSet();
+		
 
 		while (resultSet.next()) {
 			int id = resultSet.getInt("id");
 			String name = resultSet.getString("name");
-			String proffesion = resultSet.getString("profession");
-			User user = new User(id, name, proffesion);
+			String profession = resultSet.getString("profession");
+			User user = new User(id, name, profession);
 			userList.add(user);
+	        object.put("name", name);
+	        object.put("profession", profession);
 			user2 = user;
 		}
 		

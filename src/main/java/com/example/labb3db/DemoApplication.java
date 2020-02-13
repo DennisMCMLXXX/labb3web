@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
+import org.json.JSONObject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -45,11 +46,11 @@ public class DemoApplication {
 	
 	
 	@GetMapping(path = "/{id}")
-//	@Produces(MediaType.TEXT_PLAIN)
-	public User getUserByidnumber2(@PathVariable("id") int id) throws SQLException, URISyntaxException {
+//	@Produces(MediaType.APPLICATION_JSON_TYPE)
+	public JSONObject getUserByidnumber2(@PathVariable("id") int id) throws SQLException, URISyntaxException {
 		if (proceccor.getUsers(id)) {
 //			return Processor.getUserList();
-			return Processor.getUserList2();
+			return Processor.getUserList3();
 		}
 		return null;
 	}
