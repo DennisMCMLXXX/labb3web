@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.spi.DirStateFactory.Result;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -44,14 +45,13 @@ public class DemoApplication {
 	
 	
 	@GetMapping(path = "/{id}")
-	@Produces(MediaType.TEXT_PLAIN)
-	public List<User> getUserByidnumber2(@PathVariable("id") int id) throws SQLException, URISyntaxException {
+//	@Produces(MediaType.TEXT_PLAIN)
+	public Result getUserByidnumber2(@PathVariable("id") int id) throws SQLException, URISyntaxException {
 		if (proceccor.getUsers(id)) {
-			return Processor.getUserList();
+			return (Result) Processor.getUserList();
 		}
 		return null;
 	}
-	
 	Processor processor = new Processor();
 	ArrayList<User> output;
 
