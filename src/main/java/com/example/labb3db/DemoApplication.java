@@ -43,8 +43,8 @@ public class DemoApplication {
 	Processor proceccor = new Processor();
 	
 	
-	@GetMapping("/{id}")
-	@Produces(MediaType.APPLICATION_XML)
+	@GetMapping(path = "/{id}")
+//	@Produces(MediaType.APPLICATION_XML)
 	public List<User> getUserByidnumber2(@PathVariable("id") int id) throws SQLException, URISyntaxException {
 		if (proceccor.getUsers(id)) {
 			return Processor.getUserList();
