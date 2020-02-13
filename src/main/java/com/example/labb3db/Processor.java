@@ -64,7 +64,7 @@ public class Processor {
 			String proffesion = resultSet.getString("profession");
 			User user = new User(id, name, proffesion);
 			userList.add(user);
-		user = user2;
+			user2 = user;
 		}
 		
 		Processor.setUserList(userList);
