@@ -46,7 +46,7 @@ public class DemoApplication {
 	JSONObject obj = new JSONObject(); 
 	
 	@GetMapping("/3")
-	@Produces(MediaType.APPLICATION_JSON)
+//	@Produces(MediaType.APPLICATION_JSON)
 	public JSONObject getUserByidnumber2() throws SQLException, URISyntaxException {
 //		if (proceccor.getUsers(id)) {
 ////			return Processor.getUserList();
