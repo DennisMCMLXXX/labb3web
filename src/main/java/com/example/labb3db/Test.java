@@ -21,7 +21,7 @@ public class Test {
 	
 	@GetMapping("/3")
 //	@Produces(MediaType.APPLICATION_JSON)
-	public String getUserByidnumber2(Model model) throws SQLException, URISyntaxException {
+	public ArrayList<User> getUserByidnumber2(Model model) throws SQLException, URISyntaxException {
 //		if (processor.getUsers0()) {
 ////			return Processor.getUserList();
 //			return Processor.getUserList2();
@@ -35,8 +35,7 @@ public class Test {
 		ArrayList<User> output = new ArrayList<User>();
 		Connection conn = DBManager.getConnection();
 		output = DBManager.selectQuery(conn, "SELECT * FROM ppl;");
-		model.addAttribute("users", output);
 
-		return "db_plain";
+		return output;
 	}
 }
