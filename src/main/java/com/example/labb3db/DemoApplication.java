@@ -43,8 +43,7 @@ import com.example.entity.User;
 @RestController
 public class DemoApplication {
 	Processor proceccor = new Processor();
-	JSONObject obj = new JSONObject(); 
-	
+
 	@GetMapping("/3")
 //	@Produces(MediaType.APPLICATION_JSON)
 	public JSONObject getUserByidnumber2() throws SQLException, URISyntaxException {
@@ -52,6 +51,8 @@ public class DemoApplication {
 ////			return Processor.getUserList();
 //			return Processor.getUserList3();
 //		}
+		JSONObject obj = new JSONObject(); 
+		
 		String name = "name";
 		String profession = "profession";
 		obj.put(name, "Dennis");
