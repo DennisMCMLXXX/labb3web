@@ -43,16 +43,21 @@ import com.example.entity.User;
 @RestController
 public class DemoApplication {
 	Processor proceccor = new Processor();
-	
+	JSONObject obj = new JSONObject(); 
 	
 	@GetMapping(path = "/{id}")
 //	@Produces(MediaType.APPLICATION_JSON_TYPE)
 	public JSONObject getUserByidnumber2(@PathVariable("id") int id) throws SQLException, URISyntaxException {
-		if (proceccor.getUsers(id)) {
-//			return Processor.getUserList();
-			return Processor.getUserList3();
-		}
-		return null;
+//		if (proceccor.getUsers(id)) {
+////			return Processor.getUserList();
+//			return Processor.getUserList3();
+//		}
+		String name = "name";
+		String profession = "profession";
+		obj.put(name, "Dennis");
+		obj.put(profession, "profession");
+		
+		return obj;
 	}
 	Processor processor = new Processor();
 	ArrayList<User> output;
