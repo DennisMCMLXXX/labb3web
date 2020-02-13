@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.entity.User;
+
 @RequestMapping("/dbdb")
 @RestController
 public class Test {
@@ -15,10 +17,10 @@ public class Test {
 	
 	@GetMapping("/3")
 //	@Produces(MediaType.APPLICATION_JSON)
-	public JSONObject getUserByidnumber2() throws SQLException, URISyntaxException {
+	public User getUserByidnumber2() throws SQLException, URISyntaxException {
 		if (processor.getUsers0()) {
 //			return Processor.getUserList();
-			return Processor.getUserList3();
+			return Processor.getUserList2();
 		}
 //		JSONObject obj = new JSONObject(); 
 //		
