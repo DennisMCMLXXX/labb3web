@@ -1,4 +1,4 @@
-package com.example.labb3db;
+package com.example.db;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.example.entity.User;
 
 public class DBManager {
 

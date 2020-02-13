@@ -1,4 +1,4 @@
-package com.example.labb3db;
+package com.example.entity;
 
 public class User {
 	private int id;

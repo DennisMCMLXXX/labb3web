@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.labb3db.DBManager;
-import com.example.labb3db.User;
+import com.example.entity.User;
+import com.example.labb3db.Processor;
 
 @Path("/DB")
 @Controller

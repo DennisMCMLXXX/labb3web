@@ -1,32 +1,38 @@
-package com.example.db;
+package com.example.labb3db;
 
 import java.net.URISyntaxException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.db.DBManager;
 import com.example.entity.User;
-import com.example.labb3db.Processor;
 
-public class SQLTransporter {
+public class Processor {
+	ArrayList<User> output;
 
-	public boolean getUsers(final String dBName) throws SQLException, URISyntaxException {
+	public ArrayList<User> getUsers() {
 
-		Statement statement = getSQLSetup(dBName);
-		String sqlStatement = "SELECT * FROM ppl;";
-		if (statement.execute(sqlStatement)) {
-			return getUsersFromDB(statement);
-		}
-
-		return false;
+		return output;
 	}
 
-	public boolean getUsers(final String dBName, final int idnumber) throws SQLException, URISyntaxException {
-		Statement statement = getSQLSetup(dBName);
-		statement.executeUpdate("USE " + dBName + ";");
+	private static List<User> userList = null;
+
+	public static void setUserList(List<User> users) {
+		userList = new ArrayList<User>(users);
+	}
+
+	public static List<User> getUserList() {
+		return userList;
+	}
+
+	public boolean getUsers(final int idnumber) throws SQLException, URISyntaxException {
+		Connection connection = DBManager.getConnection();
+		Statement statement = connection.createStatement();
 		String sqlStatement = "SELECT * FROM ppl WHERE id LIKE " + idnumber + ";";
 		if (statement.execute(sqlStatement)) {
 			return getUsersFromDB(statement);
@@ -35,10 +41,8 @@ public class SQLTransporter {
 		return false;
 	}
 
-
-
 	private Statement getSQLSetup(String dBName) throws SQLException, URISyntaxException {
-		Connection connection = MySqlConnection.getConnection();
+		Connection connection = DBManager.getConnection();
 		Statement statement = connection.createStatement();
 		statement.executeUpdate("USE " + dBName + ";");
 		return statement;

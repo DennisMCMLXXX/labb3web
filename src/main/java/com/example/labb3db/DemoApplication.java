@@ -27,15 +27,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.db.Processor;
+import com.example.db.DBManager;
 import com.example.db.SQLTransporter;
+import com.example.entity.User;
 
-@Controller
-@SpringBootApplication
+//@Controller
+//@SpringBootApplication
+
+@RequestMapping("/dbdb")
+@RestController
 public class DemoApplication {
-	SQLTransporter sqlHandler = new SQLTransporter();
+	Processor proceccor = new Processor();
+	
+	
+	@GetMapping("/{id}")
+	@Produces(MediaType.APPLICATION_XML)
+	public List<User> getUserByidnumber2(@PathVariable("id") int id) throws SQLException, URISyntaxException {
+		if (proceccor.getUsers(id)) {
+			return Processor.getUserList();
+		}
+		return null;
+	}
+	
+	Processor processor = new Processor();
+	ArrayList<User> output;
 
 	@RequestMapping("/db")
 //	@ResponseBody
@@ -87,20 +105,9 @@ public class DemoApplication {
 	    return builder.build();
 	}
 	@RequestMapping("/users")
-//	@ResponseBody
-//	public List<User> getUsers() throws SQLException, URISyntaxException {
-//		String dBName = "labb2";
-////		Processor.createDatabase(dBName);
-//		if (sqlHandler.getUsers(dBName)) {
-//			return Processor.getUserList();
-//		}
-//		return null;
 	String DBDeletes(Model model) throws URISyntaxException, SQLException {
-		ArrayList<User> output = new ArrayList<User>();
-		Connection conn = DBManager.getConnection();
-		output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
+		output = processor.getUsers();
 		model.addAttribute("users", output);
-
 		return "db";
 	}
 
@@ -118,9 +125,9 @@ public class DemoApplication {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getUserByidnumber(@PathParam("idnumber") int idnumber) throws SQLException, URISyntaxException {
 		String dBName = "labb2";
-		if (sqlHandler.getUsers(dBName, idnumber)) {
-			return Processor.getUserList();
-		}
+//		if (sqlHandler.getUsers(dBName, idnumber)) {
+//			return Processor.getUserList();
+//		}
 		return null;
 	}
 	@GetMapping("/DBDelete")
