@@ -36,30 +36,12 @@ import com.example.db.DBManager;
 import com.example.db.SQLTransporter;
 import com.example.entity.User;
 
-//@Controller
-//@SpringBootApplication
-
-@RequestMapping("/dbdb")
-@RestController
+@Controller
+@SpringBootApplication
 public class DemoApplication {
 	Processor proceccor = new Processor();
 
-	@GetMapping("/3")
-//	@Produces(MediaType.APPLICATION_JSON)
-	public JSONObject getUserByidnumber2() throws SQLException, URISyntaxException {
-//		if (proceccor.getUsers(id)) {
-////			return Processor.getUserList();
-//			return Processor.getUserList3();
-//		}
-		JSONObject obj = new JSONObject(); 
-		
-		String name = "name";
-		String profession = "profession";
-		obj.put(name, "Dennis");
-		obj.put(profession, "profession");
-		
-		return obj;
-	}
+
 	Processor processor = new Processor();
 	ArrayList<User> output;
 
