@@ -42,6 +42,16 @@ public class Processor {
 		return userList;
 	}
 
+	public boolean getUsers0() throws SQLException, URISyntaxException {
+		Connection connection = DBManager.getConnection();
+		Statement statement = connection.createStatement();
+		String sqlStatement = "SELECT * FROM ppl;";
+		if (statement.execute(sqlStatement)) {
+			return getUsersFromDB(statement);
+		}
+		
+		return false;
+	}
 	public boolean getUsers(final int idnumber) throws SQLException, URISyntaxException {
 		Connection connection = DBManager.getConnection();
 		Statement statement = connection.createStatement();
