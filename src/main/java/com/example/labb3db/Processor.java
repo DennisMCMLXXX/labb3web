@@ -57,7 +57,7 @@ public class Processor {
 		Statement statement = connection.createStatement();
 		String sqlStatement = "SELECT * FROM ppl WHERE id LIKE " + idnumber + ";";
 		if (statement.execute(sqlStatement)) {
-			return getUsersFromDB(statement);
+			return getUsersFromDB2(statement);
 		}
 
 		return false;
