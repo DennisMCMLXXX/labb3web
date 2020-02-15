@@ -23,11 +23,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.entity.User;
 import com.example.labb3db.Processor;
 
-@RestController
 @RequestMapping("/DB")
+@RestController
 public class DB_RESTService {
 	SQLTransporter sqlHandler = new SQLTransporter();
-
+	@GetMapping("/3")
+	public ArrayList<User> getUserByidnumber2(Model model) throws SQLException, URISyntaxException {
+		ArrayList<User> output = new ArrayList<User>();
+		Connection conn = DBManager.getConnection();
+		output = DBManager.selectQuery(conn, "SELECT * FROM ppl;");
+		return output;
+	}
 //	@GET
 //	@Path("/users")
 //	@RequestMapping(
