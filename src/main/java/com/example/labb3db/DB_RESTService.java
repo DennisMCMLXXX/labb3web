@@ -49,8 +49,8 @@ public class DB_RESTService {
 	}
 	
 	@PutMapping("user/add/{name}/{profession}")
-	public void addUser (@PathVariable("name") String name, @PathVariable("profession") String profession) throws URISyntaxException, SQLException {
-		DBManager.addUser(name, profession);
+	public String addUser (@PathVariable("name") String name, @PathVariable("profession") String profession) throws URISyntaxException, SQLException {
+		return DBManager.addUser(name, profession) ? "Success!!" : "Error!";
 	}
 
 	@GetMapping("/user/id/{id}")
