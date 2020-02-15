@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,7 +48,7 @@ public class DB_RESTService {
 		return output;
 	}
 	
-	@PostMapping("user/add/{name}/{profession}")
+	@PutMapping("user/add/{name}/{profession}")
 	public void addUser (@PathVariable("name") String name, @PathVariable("profession") String profession) throws URISyntaxException, SQLException {
 		DBManager.addUser(name, profession);
 	}
