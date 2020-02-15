@@ -73,5 +73,14 @@ public class DBManager {
 			}
 		return false;
 	}
+	public boolean deleteUser(int id) throws URISyntaxException, SQLException {
+		Connection connection = MySqlConnection.getConnection();
+		Statement statement = connection.createStatement();
+		String query = "DELETE FROM ppl WHERE id= '" + id + "');";
+		if (statement.executeUpdate(query) != 0) {
+			return true;
+		}
+		return false;
+	}
 
 }

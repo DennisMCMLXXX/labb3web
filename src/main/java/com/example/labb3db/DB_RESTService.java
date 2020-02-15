@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +36,17 @@ public class DB_RESTService {
 	DBManager dbmanager = new DBManager();
 	ArrayList<User> output;
 
+	@PutMapping("user/add/{name}/{profession}")
+	public String addUser(@PathVariable("name") String name, @PathVariable("profession") String profession)
+			throws URISyntaxException, SQLException {
+		return dbmanager.addUser(name, profession) ? "Success!!" : "Error!";
+	}
+
+	@DeleteMapping("user/delete/{id}")
+	public String deleteUser(@PathVariable("id") int id) throws URISyntaxException, SQLException {
+		return dbmanager.deleteUser(id) ? "Success!!" : "Error!";
+	}
+	
 	@GetMapping("/all")
 	public ArrayList<User> getUserByidnumber2() throws SQLException, URISyntaxException {
 		output = new ArrayList<User>();
@@ -49,11 +61,6 @@ public class DB_RESTService {
 		return output;
 	}
 
-	@PutMapping("user/add/{name}/{profession}")
-	public String addUser(@PathVariable("name") String name, @PathVariable("profession") String profession)
-			throws URISyntaxException, SQLException {
-		return dbmanager.addUser(name, profession) ? "Success!!" : "Error!";
-	}
 
 	@GetMapping("/user/id/{id}")
 	ArrayList<User> getUserByid(@PathVariable("id") int id) throws SQLException, URISyntaxException {
