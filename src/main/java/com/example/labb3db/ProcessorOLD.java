@@ -12,18 +12,18 @@ import java.util.List;
 import org.json.JSONObject;
 
 import com.example.db.DBManager;
+import com.example.db.MySqlConnection;
 import com.example.entity.User;
 
-public class Processor {
+public class ProcessorOLD {
 	ArrayList<User> output;
 
 	public ArrayList<User> getUsers() {
 
 		return output;
 	}
-	private static JSONObject object = null;;
 	
-
+	private static JSONObject object = null;;
 	private static List<User> userList = null;
 	private static User user2 = null;
 
@@ -43,7 +43,7 @@ public class Processor {
 	}
 
 	public boolean getUsers0() throws SQLException, URISyntaxException {
-		Connection connection = DBManager.getConnection();
+		Connection connection = MySqlConnection.getConnection();
 		Statement statement = connection.createStatement();
 		String sqlStatement = "SELECT * FROM ppl;";
 		if (statement.execute(sqlStatement)) {
@@ -53,7 +53,7 @@ public class Processor {
 		return false;
 	}
 	public boolean getUsers(final int idnumber) throws SQLException, URISyntaxException {
-		Connection connection = DBManager.getConnection();
+		Connection connection = MySqlConnection.getConnection();
 		Statement statement = connection.createStatement();
 		String sqlStatement = "SELECT * FROM ppl WHERE id LIKE " + idnumber + ";";
 		if (statement.execute(sqlStatement)) {
@@ -64,7 +64,7 @@ public class Processor {
 	}
 
 	private Statement getSQLSetup(String dBName) throws SQLException, URISyntaxException {
-		Connection connection = DBManager.getConnection();
+		Connection connection = MySqlConnection.getConnection();
 		Statement statement = connection.createStatement();
 		statement.executeUpdate("USE " + dBName + ";");
 		return statement;
@@ -87,7 +87,7 @@ public class Processor {
 			user2 = user;
 		}
 		
-		Processor.setUserList(userList);
+		ProcessorOLD.setUserList(userList);
 		return true;
 	}
 
@@ -104,7 +104,7 @@ public class Processor {
 			userList.add(user);
 		}
 
-		Processor.setUserList(userList);
+		ProcessorOLD.setUserList(userList);
 		return true;
 	}
 }

@@ -29,45 +29,20 @@ import com.example.entity.User;
 @RestController
 public class DB_RESTService {
 	SQLTransporter sqlHandler = new SQLTransporter();
-	Processor processor = new Processor();
-
+	ProcessorOLD processorOLD = new ProcessorOLD();
+	
 	@GetMapping("/3")
 	public ArrayList<User> getUserByidnumber2() throws SQLException, URISyntaxException {
 		ArrayList<User> output = new ArrayList<User>();
-		Connection conn = DBManager.getConnection();
-		output = DBManager.selectQuery(conn, "SELECT * FROM ppl;");
+		output = DBManager.selectQuery("SELECT * FROM ppl;");
 		return output;
 	}
 
-//	@GET
-//	@Path("/users")
-//	@RequestMapping(
-//			value = "/users",
-//			method = RequestMethod.GET,
-//			produces = { "application/json" } )
-//	@ResponseBody
-////	public List<User> getUsers() throws SQLException, URISyntaxException {
-////		String dBName = "labb2";
-//////		Processor.createDatabase(dBName);
-////		if (sqlHandler.getUsers(dBName)) {
-////			return Processor.getUserList();
-////		}
-////		return null;
-//	String DBDeletes(Model model) throws URISyntaxException, SQLException {
-//		ArrayList<User> output = new ArrayList<User>();
-//		Connection conn = DBManager.getConnection();
-//		output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
-//		model.addAttribute("users", output);
-//
-//		return "db";
-//	
-//}
+
 	@RequestMapping("/DBDeletes/{name}")
 	ArrayList<User> DBDeletes(@PathVariable("name") String name) throws URISyntaxException, SQLException {
 		ArrayList<User> output = new ArrayList<User>();
-		Connection conn = DBManager.getConnection();
-		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE Name='" + name + "'");
-
+		output = DBManager.selectQuery("SELECT * FROM ppl WHERE Name='" + name + "'");
 		return output;
 	}
 
@@ -75,24 +50,23 @@ public class DB_RESTService {
 	@Produces(MediaType.APPLICATION_JSON)
 	ArrayList<User> getUserByid(@PathVariable("id") int id) throws SQLException, URISyntaxException {
 		ArrayList<User> output = new ArrayList<User>();
-		Connection conn = DBManager.getConnection();
-		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE id='" + id + "'");
+		output = DBManager.selectQuery("SELECT * FROM ppl WHERE id='" + id + "'");
 		return output;
 	}
 
 	@GetMapping("/users/id/{id}")
 //	@Produces (MediaType.APPLICATION_JSON)
 	User getUserByidnumber(@PathVariable("id") int id) throws SQLException, URISyntaxException {
-		if (processor.getUsers(id)) {
-			return Processor.getUserList2();
+		if (processorOLD.getUsers(id)) {
+			return ProcessorOLD.getUserList2();
 		}
 		return null;
 	}
 	@GetMapping("/users/i/{id}")
 //	@Produces (MediaType.APPLICATION_JSON)
 	List<User> getUserByidnumberorg(@PathVariable("id") int id) throws SQLException, URISyntaxException {
-		if (processor.getUsers(id)) {
-			return Processor.getUserList();
+		if (processorOLD.getUsers(id)) {
+			return ProcessorOLD.getUserList();
 		}
 		return null;
 	}
@@ -100,8 +74,8 @@ public class DB_RESTService {
 	@GetMapping("/users/idd/{id}")
 //	@Produces (MediaType.APPLICATION_JSON)
 	JSONObject getUserByidnumber2(@PathVariable("id") int id) throws SQLException, URISyntaxException {
-		if (processor.getUsers(id)) {
-			return Processor.getUserList3();
+		if (processorOLD.getUsers(id)) {
+			return ProcessorOLD.getUserList3();
 		}
 		return null;
 	}

@@ -33,16 +33,17 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.db.DBManager;
+import com.example.db.MySqlConnection;
 import com.example.db.SQLTransporter;
 import com.example.entity.User;
 
 @Controller
 @SpringBootApplication
 public class DemoApplication {
-	Processor proceccor = new Processor();
+	ProcessorOLD proceccor = new ProcessorOLD();
 
 
-	Processor processor = new Processor();
+	ProcessorOLD processor = new ProcessorOLD();
 	ArrayList<User> output;
 
 	@RequestMapping("/db")
@@ -50,7 +51,7 @@ public class DemoApplication {
 	String db(Model model) {
 		ArrayList<User> output = new ArrayList<User>();
 		try {
-			Connection conn = DBManager.getConnection();
+			Connection conn = MySqlConnection.getConnection();
 //			DBManager.updateQuery(conn,
 //					"CREATE TABLE IF NOT EXISTS ppl (id SERIAL PRIMARY KEY, name TEXT NOT NULL, profession TEXT NOT NULL)");
 //			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis', 'Student')");
@@ -68,7 +69,7 @@ public class DemoApplication {
 //					"INSERT INTO ppl(name, profession) VALUES('Liselotte', 'Systemutvecklare / handledare');");
 //			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Kent', 'Linux tekniker');");
 //			String output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
-			output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
+			output = DBManager.selectQuery("SELECT * FROM ppl");
 //			output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
 
 //			DBManager.updateQuery(conn, "drop table ppl"); // ta bort alla rader
@@ -85,9 +86,9 @@ public class DemoApplication {
 	@GetMapping("/test/{name}")
 	public Response test(@PathParam("name") String name) throws SQLException, URISyntaxException {
 		ArrayList<User> output = new ArrayList<User>();
-		Connection conn = DBManager.getConnection();
+		Connection conn = MySqlConnection.getConnection();
 //		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE Name='" + name + "'");
-		output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
+		output = DBManager.selectQuery("SELECT * FROM ppl");
 
 	  
 		ResponseBuilder builder = Response.ok(output);
@@ -104,8 +105,8 @@ public class DemoApplication {
 	@RequestMapping("/DBDeletes/{name}")
 	String DBDeletes(Model model, @PathVariable("name") String name) throws URISyntaxException, SQLException {
 		ArrayList<User> output = new ArrayList<User>();
-		Connection conn = DBManager.getConnection();
-		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE Name='" + name + "'");
+		Connection conn = MySqlConnection.getConnection();
+		output = DBManager.selectQuery("SELECT * FROM ppl WHERE Name='" + name + "'");
 		model.addAttribute("users", output);
 
 		return "db_plain";

@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.entity.User;
-import com.example.labb3db.Processor;
+import com.example.labb3db.ProcessorOLD;
 
 public class SQLTransporter {
 
 	public boolean getUsers() throws SQLException, URISyntaxException {
-		Connection connection = DBManager.getConnection();
+		Connection connection = MySqlConnection.getConnection();
 		Statement statement = connection.createStatement();
 		String sqlStatement = "SELECT * FROM ppl;";
 		if (statement.execute(sqlStatement)) {
@@ -25,7 +25,7 @@ public class SQLTransporter {
 	}
 
 	public boolean getUsers(final int idnumber) throws SQLException, URISyntaxException {
-		Connection connection = DBManager.getConnection();
+		Connection connection = MySqlConnection.getConnection();
 		Statement statement = connection.createStatement();
 		String sqlStatement = "SELECT * FROM ppl WHERE id LIKE " + idnumber + ";";
 		if (statement.execute(sqlStatement)) {
@@ -48,7 +48,7 @@ public class SQLTransporter {
 			userList.add(user);
 		}
 
-		Processor.setUserList(userList);
+		ProcessorOLD.setUserList(userList);
 		return true;
 	}
 }
