@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,7 +32,7 @@ public class DB_RESTService {
 	SQLTransporter sqlHandler = new SQLTransporter();
 	ProcessorOLD processorOLD = new ProcessorOLD();
 	
-	@GetMapping("/3")
+	@GetMapping("/all")
 	public ArrayList<User> getUserByidnumber2() throws SQLException, URISyntaxException {
 		ArrayList<User> output = new ArrayList<User>();
 		output = DBManager.selectQuery("SELECT * FROM ppl;");
@@ -39,29 +40,25 @@ public class DB_RESTService {
 	}
 
 
-	@RequestMapping("/DBDeletes/{name}")
+	@GetMapping("/user/name/{name}")
 	ArrayList<User> DBDeletes(@PathVariable("name") String name) throws URISyntaxException, SQLException {
 		ArrayList<User> output = new ArrayList<User>();
 		output = DBManager.selectQuery("SELECT * FROM ppl WHERE Name='" + name + "'");
 		return output;
 	}
+	
+	@PostMapping("user/add/{name}/{profession}")
+	public void addUser (@PathVariable("name") String name, @PathVariable("profession") String profession) throws URISyntaxException, SQLException {
+		DBManager.addUser(name, profession);
+	}
 
-	@GetMapping("/user/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@GetMapping("/user/id/{id}")
 	ArrayList<User> getUserByid(@PathVariable("id") int id) throws SQLException, URISyntaxException {
 		ArrayList<User> output = new ArrayList<User>();
 		output = DBManager.selectQuery("SELECT * FROM ppl WHERE id='" + id + "'");
 		return output;
 	}
 
-	@GetMapping("/users/id/{id}")
-//	@Produces (MediaType.APPLICATION_JSON)
-	User getUserByidnumber(@PathVariable("id") int id) throws SQLException, URISyntaxException {
-		if (processorOLD.getUsers(id)) {
-			return ProcessorOLD.getUserList2();
-		}
-		return null;
-	}
 	@GetMapping("/users/i/{id}")
 //	@Produces (MediaType.APPLICATION_JSON)
 	List<User> getUserByidnumberorg(@PathVariable("id") int id) throws SQLException, URISyntaxException {

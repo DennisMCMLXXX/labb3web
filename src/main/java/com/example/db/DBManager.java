@@ -1,29 +1,26 @@
 package com.example.db;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.HttpURLConnection;
-import java.net.ProtocolException;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import com.example.entity.User;
 
 public class DBManager {
+	
+	private static ArrayList<User> out;
+
+	public void setStr(String str) throws SQLException, URISyntaxException {
+		out = selectQuery(str);
+	}
+	public ArrayList<User> getStr() {
+		return out;
+	}
 
 	private JSONArray json;
 //
@@ -54,10 +51,10 @@ public class DBManager {
 	}
 
 	public static ArrayList<User> selectQuery(String query) throws SQLException, URISyntaxException {
+		out = new ArrayList<User>();
 		Connection con = MySqlConnection.getConnection();
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(query);
-		ArrayList<User> out = new ArrayList<User>();
 		while (rs.next()) {
 			User usr = new User();
 			usr.setId(rs.getInt("id"));
@@ -67,5 +64,16 @@ public class DBManager {
 		}
 		return out;
 	}
-	
+	public static boolean addUser(String name, String profession) throws URISyntaxException, SQLException {
+
+			Connection connection = MySqlConnection.getConnection();
+			Statement statement = connection.createStatement();
+			String query = "INSERT INTO ppl(name, profession) VALUES('" + name + "', '" + profession + "');";
+
+			if (statement.executeUpdate(query) != 0) {
+				return true;
+			}
+		return false;
+	}
+
 }
