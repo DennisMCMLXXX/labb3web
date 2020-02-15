@@ -1,4 +1,4 @@
-package com.example.db;
+package com.example.labb3db;
 
 import java.net.URISyntaxException;
 import java.sql.Connection;
@@ -20,8 +20,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.db.DBManager;
+import com.example.db.SQLTransporter;
 import com.example.entity.User;
-import com.example.labb3db.Processor;
 
 @RequestMapping("/DB")
 @RestController
