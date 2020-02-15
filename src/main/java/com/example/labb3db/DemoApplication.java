@@ -41,6 +41,7 @@ import com.example.entity.User;
 @SpringBootApplication
 public class DemoApplication {
 	ProcessorOLD proceccor = new ProcessorOLD();
+	DBManager dbmanager = new DBManager();
 
 
 	ProcessorOLD processor = new ProcessorOLD();
@@ -69,7 +70,7 @@ public class DemoApplication {
 //					"INSERT INTO ppl(name, profession) VALUES('Liselotte', 'Systemutvecklare / handledare');");
 //			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Kent', 'Linux tekniker');");
 //			String output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
-			output = DBManager.selectQuery("SELECT * FROM ppl");
+			output = dbmanager.selectQuery("SELECT * FROM ppl");
 //			output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
 
 //			DBManager.updateQuery(conn, "drop table ppl"); // ta bort alla rader
@@ -88,7 +89,7 @@ public class DemoApplication {
 		ArrayList<User> output = new ArrayList<User>();
 		Connection conn = MySqlConnection.getConnection();
 //		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE Name='" + name + "'");
-		output = DBManager.selectQuery("SELECT * FROM ppl");
+		output = dbmanager.selectQuery("SELECT * FROM ppl");
 
 	  
 		ResponseBuilder builder = Response.ok(output);
@@ -106,7 +107,7 @@ public class DemoApplication {
 	String DBDeletes(Model model, @PathVariable("name") String name) throws URISyntaxException, SQLException {
 		ArrayList<User> output = new ArrayList<User>();
 		Connection conn = MySqlConnection.getConnection();
-		output = DBManager.selectQuery("SELECT * FROM ppl WHERE Name='" + name + "'");
+		output = dbmanager.selectQuery("SELECT * FROM ppl WHERE Name='" + name + "'");
 		model.addAttribute("users", output);
 
 		return "db_plain";

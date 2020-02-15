@@ -13,7 +13,7 @@ import com.example.entity.User;
 
 public class DBManager {
 	
-	private static ArrayList<User> out;
+	private ArrayList<User> out;
 
 	public void setStr(String str) throws SQLException, URISyntaxException {
 		out = selectQuery(str);
@@ -50,7 +50,7 @@ public class DBManager {
 		stmt.executeUpdate(s);
 	}
 
-	public static ArrayList<User> selectQuery(String query) throws SQLException, URISyntaxException {
+	public ArrayList<User> selectQuery(String query) throws SQLException, URISyntaxException {
 		out = new ArrayList<User>();
 		Connection con = MySqlConnection.getConnection();
 		Statement stmt = con.createStatement();
@@ -64,12 +64,10 @@ public class DBManager {
 		}
 		return out;
 	}
-	public static boolean addUser(String name, String profession) throws URISyntaxException, SQLException {
-
+	public boolean addUser(String name, String profession) throws URISyntaxException, SQLException {
 			Connection connection = MySqlConnection.getConnection();
 			Statement statement = connection.createStatement();
 			String query = "INSERT INTO ppl(name, profession) VALUES('" + name + "', '" + profession + "');";
-
 			if (statement.executeUpdate(query) != 0) {
 				return true;
 			}

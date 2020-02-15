@@ -32,31 +32,33 @@ import com.example.entity.User;
 public class DB_RESTService {
 	SQLTransporter sqlHandler = new SQLTransporter();
 	ProcessorOLD processorOLD = new ProcessorOLD();
-	
+	DBManager dbmanager = new DBManager();
+	ArrayList<User> output;
+
 	@GetMapping("/all")
 	public ArrayList<User> getUserByidnumber2() throws SQLException, URISyntaxException {
-		ArrayList<User> output = new ArrayList<User>();
-		output = DBManager.selectQuery("SELECT * FROM ppl;");
+		output = new ArrayList<User>();
+		output = dbmanager.selectQuery("SELECT * FROM ppl;");
 		return output;
 	}
-
 
 	@GetMapping("/user/name/{name}")
 	ArrayList<User> DBDeletes(@PathVariable("name") String name) throws URISyntaxException, SQLException {
-		ArrayList<User> output = new ArrayList<User>();
-		output = DBManager.selectQuery("SELECT * FROM ppl WHERE Name='" + name + "'");
+		output = new ArrayList<User>();
+		output = dbmanager.selectQuery("SELECT * FROM ppl WHERE Name='" + name + "'");
 		return output;
 	}
-	
+
 	@PutMapping("user/add/{name}/{profession}")
-	public String addUser (@PathVariable("name") String name, @PathVariable("profession") String profession) throws URISyntaxException, SQLException {
-		return DBManager.addUser(name, profession) ? "Success!!" : "Error!";
+	public String addUser(@PathVariable("name") String name, @PathVariable("profession") String profession)
+			throws URISyntaxException, SQLException {
+		return dbmanager.addUser(name, profession) ? "Success!!" : "Error!";
 	}
 
 	@GetMapping("/user/id/{id}")
 	ArrayList<User> getUserByid(@PathVariable("id") int id) throws SQLException, URISyntaxException {
-		ArrayList<User> output = new ArrayList<User>();
-		output = DBManager.selectQuery("SELECT * FROM ppl WHERE id='" + id + "'");
+		output = new ArrayList<User>();
+		output = dbmanager.selectQuery("SELECT * FROM ppl WHERE id='" + id + "'");
 		return output;
 	}
 
