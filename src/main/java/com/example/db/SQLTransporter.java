@@ -13,9 +13,9 @@ import com.example.labb3db.Processor;
 
 public class SQLTransporter {
 
-	public boolean getUsers(final String dBName) throws SQLException, URISyntaxException {
-
-		Statement statement = getSQLSetup(dBName);
+	public boolean getUsers() throws SQLException, URISyntaxException {
+		Connection connection = DBManager.getConnection();
+		Statement statement = connection.createStatement();
 		String sqlStatement = "SELECT * FROM ppl;";
 		if (statement.execute(sqlStatement)) {
 			return getUsersFromDB(statement);
@@ -24,24 +24,15 @@ public class SQLTransporter {
 		return false;
 	}
 
-	public boolean getUsers(final String dBName, final int idnumber) throws SQLException, URISyntaxException {
-		Statement statement = getSQLSetup(dBName);
-		statement.executeUpdate("USE " + dBName + ";");
+	public boolean getUsers(final int idnumber) throws SQLException, URISyntaxException {
+		Connection connection = DBManager.getConnection();
+		Statement statement = connection.createStatement();
 		String sqlStatement = "SELECT * FROM ppl WHERE id LIKE " + idnumber + ";";
 		if (statement.execute(sqlStatement)) {
 			return getUsersFromDB(statement);
 		}
 
 		return false;
-	}
-
-
-
-	private Statement getSQLSetup(String dBName) throws SQLException, URISyntaxException {
-		Connection connection = MySqlConnection.getConnection();
-		Statement statement = connection.createStatement();
-		statement.executeUpdate("USE " + dBName + ";");
-		return statement;
 	}
 
 	private boolean getUsersFromDB(Statement statement) throws SQLException {

@@ -23,12 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.entity.User;
 import com.example.labb3db.Processor;
 
-@Path("/DB")
-@Controller
-@SpringBootApplication
 @RestController
 @RequestMapping("/DB")
-public class UserService {
+public class DB_RESTService {
 	SQLTransporter sqlHandler = new SQLTransporter();
 
 //	@GET
@@ -55,32 +52,29 @@ public class UserService {
 //	
 //}
 	@RequestMapping("/DBDeletes/{name}")
-	String DBDeletes(Model model, @PathVariable("name") String name) throws URISyntaxException, SQLException {
+	ArrayList<User> DBDeletes(@PathVariable("name") String name) throws URISyntaxException, SQLException {
 		ArrayList<User> output = new ArrayList<User>();
 		Connection conn = DBManager.getConnection();
 		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE Name='" + name + "'");
-		model.addAttribute("users", output);
 
-		return "db_plain";
+		return output;
 	}
 
 	@GetMapping("/user/{id}")
 	@Produces (MediaType.APPLICATION_JSON)
-	String getUserByid(Model model, @PathVariable("id") int id) throws SQLException, URISyntaxException {
+	ArrayList<User> getUserByid(Model model, @PathVariable("id") int id) throws SQLException, URISyntaxException {
 		ArrayList<User> output = new ArrayList<User>();
 		Connection conn = DBManager.getConnection();
 		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE id='" + id + "'");
-		model.addAttribute("users", output);
-		return "db_plain";
+		return output;
 	}
 	
 //	@GET
 //	@Path("/users/{idnumber}")
 //	@Produces(MediaType.APPLICATION_JSON)
-	@RequestMapping("/users/{idnumber}")
-	List<User> getUserByidnumber(Model model, @PathVariable("idnumber") int idnumber) throws SQLException, URISyntaxException {
-		String dBName = "labb2";
-		if (sqlHandler.getUsers(dBName, idnumber)) {
+	@RequestMapping("/users/id/{id}")
+	List<User> getUserByidnumber(Model model, @PathVariable("id") int id) throws SQLException, URISyntaxException {
+		if (sqlHandler.getUsers(id)) {
 			return Processor.getUserList();
 		}
 		return null;
