@@ -65,8 +65,7 @@ public class DBManager {
 		return out;
 	}
 	public boolean addUser(String name, String profession) throws URISyntaxException, SQLException {
-			Connection connection = MySqlConnection.getConnection();
-			Statement statement = connection.createStatement();
+			Statement statement = beforeQuery();
 			String query = "INSERT INTO ppl(name, profession) VALUES('" + name + "', '" + profession + "');";
 			if (statement.executeUpdate(query) != 0) {
 				return true;
@@ -74,13 +73,25 @@ public class DBManager {
 		return false;
 	}
 	public boolean deleteUser(int id) throws URISyntaxException, SQLException {
-		Connection connection = MySqlConnection.getConnection();
-		Statement statement = connection.createStatement();
+		Statement statement = beforeQuery();
 		String query = "DELETE FROM ppl WHERE id=" + id + ";";
 		if (statement.executeUpdate(query) != 0) {
 			return true;
 		}
 		return false;
+	}
+	public boolean updateUser(int id, String name, String profession) throws URISyntaxException, SQLException {
+		Statement statement = beforeQuery();
+		String query = "UPDATE ppl SET name'" + name + "', profession='" + profession  +"' WHERE id=" + id;
+		if (statement.executeUpdate(query) != 0) {
+			return true;
+		}
+		return false;
+	}
+	private Statement beforeQuery() throws URISyntaxException, SQLException {
+		Connection connection = MySqlConnection.getConnection();
+		Statement statement = connection.createStatement();
+		return statement;
 	}
 
 }

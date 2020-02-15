@@ -36,7 +36,7 @@ public class DB_RESTService {
 	DBManager dbmanager = new DBManager();
 	ArrayList<User> output;
 
-	@PutMapping("user/add/{name}/{profession}")
+	@PostMapping("user/add/{name}/{profession}")
 	public String addUser(@PathVariable("name") String name, @PathVariable("profession") String profession)
 			throws URISyntaxException, SQLException {
 		return dbmanager.addUser(name, profession) ? "Success!!" : "Error!";
@@ -45,6 +45,12 @@ public class DB_RESTService {
 	@DeleteMapping("user/delete/{id}")
 	public String deleteUser(@PathVariable("id") int id) throws URISyntaxException, SQLException {
 		return dbmanager.deleteUser(id) ? "Success!!" : "Error!";
+	}
+	
+	@PutMapping("user/update/{id}/{name}/{profession}") 
+		public String updateUser(@PathVariable("id") int id, @PathVariable("name") String name, @PathVariable("profession") String profession)
+				throws URISyntaxException, SQLException {
+			return dbmanager.updateUser(id, name, profession) ? "Success!!" : "Error!";
 	}
 	
 	@GetMapping("/all")
