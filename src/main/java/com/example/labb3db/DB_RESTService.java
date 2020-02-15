@@ -29,6 +29,8 @@ import com.example.entity.User;
 @RestController
 public class DB_RESTService {
 	SQLTransporter sqlHandler = new SQLTransporter();
+	Processor processor = new Processor();
+	
 	@GetMapping("/3")
 	public ArrayList<User> getUserByidnumber2(Model model) throws SQLException, URISyntaxException {
 		ArrayList<User> output = new ArrayList<User>();
@@ -81,8 +83,9 @@ public class DB_RESTService {
 //	@Path("/users/{idnumber}")
 //	@Produces(MediaType.APPLICATION_JSON)
 	@GetMapping("/users/id/{id}")
+//	@Produces (MediaType.APPLICATION_JSON)
 	User getUserByidnumber(Model model, @PathVariable("id") int id) throws SQLException, URISyntaxException {
-		if (sqlHandler.getUsers(id)) {
+		if (processor.getUsers(id)) {
 			return Processor.getUserList2();
 		}
 		return null;
@@ -93,8 +96,9 @@ public class DB_RESTService {
 //		return "db_plain";
 	}
 	@GetMapping("/users/idd/{id}")
+//	@Produces (MediaType.APPLICATION_JSON)
 	JSONObject getUserByidnumber2(Model model, @PathVariable("id") int id) throws SQLException, URISyntaxException {
-		if (sqlHandler.getUsers(id)) {
+		if (processor.getUsers(id)) {
 			return Processor.getUserList3();
 		}
 		return null;
