@@ -30,14 +30,15 @@ import com.example.entity.User;
 public class DB_RESTService {
 	SQLTransporter sqlHandler = new SQLTransporter();
 	Processor processor = new Processor();
-	
+
 	@GetMapping("/3")
-	public ArrayList<User> getUserByidnumber2(Model model) throws SQLException, URISyntaxException {
+	public ArrayList<User> getUserByidnumber2() throws SQLException, URISyntaxException {
 		ArrayList<User> output = new ArrayList<User>();
 		Connection conn = DBManager.getConnection();
 		output = DBManager.selectQuery(conn, "SELECT * FROM ppl;");
 		return output;
 	}
+
 //	@GET
 //	@Path("/users")
 //	@RequestMapping(
@@ -71,55 +72,37 @@ public class DB_RESTService {
 	}
 
 	@GetMapping("/user/{id}")
-	@Produces (MediaType.APPLICATION_JSON)
-	ArrayList<User> getUserByid(Model model, @PathVariable("id") int id) throws SQLException, URISyntaxException {
+	@Produces(MediaType.APPLICATION_JSON)
+	ArrayList<User> getUserByid(@PathVariable("id") int id) throws SQLException, URISyntaxException {
 		ArrayList<User> output = new ArrayList<User>();
 		Connection conn = DBManager.getConnection();
 		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE id='" + id + "'");
 		return output;
 	}
-	
-//	@GET
-//	@Path("/users/{idnumber}")
-//	@Produces(MediaType.APPLICATION_JSON)
+
 	@GetMapping("/users/id/{id}")
 //	@Produces (MediaType.APPLICATION_JSON)
-	User getUserByidnumber(Model model, @PathVariable("id") int id) throws SQLException, URISyntaxException {
+	User getUserByidnumber(@PathVariable("id") int id) throws SQLException, URISyntaxException {
 		if (processor.getUsers(id)) {
 			return Processor.getUserList2();
 		}
 		return null;
-//		ArrayList<User> output = new ArrayList<User>();
-//		Connection conn = DBManager.getConnection();
-//		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE id='" + idnumber + "'");
-//		model.addAttribute("users", output);
-//		return "db_plain";
 	}
+	@GetMapping("/users/i/{id}")
+//	@Produces (MediaType.APPLICATION_JSON)
+	List<User> getUserByidnumberorg(@PathVariable("id") int id) throws SQLException, URISyntaxException {
+		if (processor.getUsers(id)) {
+			return Processor.getUserList();
+		}
+		return null;
+	}
+
 	@GetMapping("/users/idd/{id}")
 //	@Produces (MediaType.APPLICATION_JSON)
-	JSONObject getUserByidnumber2(Model model, @PathVariable("id") int id) throws SQLException, URISyntaxException {
+	JSONObject getUserByidnumber2(@PathVariable("id") int id) throws SQLException, URISyntaxException {
 		if (processor.getUsers(id)) {
 			return Processor.getUserList3();
 		}
 		return null;
-//		ArrayList<User> output = new ArrayList<User>();
-//		Connection conn = DBManager.getConnection();
-//		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE id='" + idnumber + "'");
-//		model.addAttribute("users", output);
-//		return "db_plain";
 	}
-	/**
-	 * kunde inte använda mig av denna tjänst för jag fick felmeddelande att denna
-	 * och id kolliderade. Vet ej varför.
-	 */
-//	@GET
-//	@Path("/users/{name}")
-//	@Produces(MediaType.APPLICATION_XML)
-//	public List<User> getUserByName(@PathParam("name") String name) throws SQLException {
-//		String dBName = "labb2";
-//		if (sqlHandler.getUsers(dBName, name)) {
-//			return UserDBManager.getUserList();
-//		}
-//		return null;
-//	}
 }
