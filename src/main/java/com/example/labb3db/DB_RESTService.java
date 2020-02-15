@@ -12,6 +12,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.json.JSONObject;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,9 +81,21 @@ public class DB_RESTService {
 //	@Path("/users/{idnumber}")
 //	@Produces(MediaType.APPLICATION_JSON)
 	@RequestMapping("/users/id/{id}")
-	List<User> getUserByidnumber(Model model, @PathVariable("id") int id) throws SQLException, URISyntaxException {
+	User getUserByidnumber(Model model, @PathVariable("id") int id) throws SQLException, URISyntaxException {
 		if (sqlHandler.getUsers(id)) {
-			return Processor.getUserList();
+			return Processor.getUserList2();
+		}
+		return null;
+//		ArrayList<User> output = new ArrayList<User>();
+//		Connection conn = DBManager.getConnection();
+//		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE id='" + idnumber + "'");
+//		model.addAttribute("users", output);
+//		return "db_plain";
+	}
+	@RequestMapping("/users/idd/{id}")
+	JSONObject getUserByidnumber2(Model model, @PathVariable("id") int id) throws SQLException, URISyntaxException {
+		if (sqlHandler.getUsers(id)) {
+			return Processor.getUserList3();
 		}
 		return null;
 //		ArrayList<User> output = new ArrayList<User>();
