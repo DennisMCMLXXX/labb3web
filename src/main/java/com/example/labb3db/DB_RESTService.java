@@ -80,7 +80,7 @@ public class DB_RESTService {
 //	@GET
 //	@Path("/users/{idnumber}")
 //	@Produces(MediaType.APPLICATION_JSON)
-	@RequestMapping("/users/id/{id}")
+	@GetMapping("/users/id/{id}")
 	User getUserByidnumber(Model model, @PathVariable("id") int id) throws SQLException, URISyntaxException {
 		if (sqlHandler.getUsers(id)) {
 			return Processor.getUserList2();
@@ -92,7 +92,7 @@ public class DB_RESTService {
 //		model.addAttribute("users", output);
 //		return "db_plain";
 	}
-	@RequestMapping("/users/idd/{id}")
+	@GetMapping("/users/idd/{id}")
 	JSONObject getUserByidnumber2(Model model, @PathVariable("id") int id) throws SQLException, URISyntaxException {
 		if (sqlHandler.getUsers(id)) {
 			return Processor.getUserList3();
