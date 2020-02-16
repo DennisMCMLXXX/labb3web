@@ -30,28 +30,37 @@ public class DemoApplication {
 	DBManager dbmanager = new DBManager();
 	ArrayList<User> output;
 
+	@RequestMapping("/")
+	@ResponseBody
+	ModelAndView index() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("index");
+		return modelAndView;
+	}
+
 	@RequestMapping("/db")
 //	@ResponseBody
 	String db(Model model) {
 		ArrayList<User> output = new ArrayList<User>();
 		try {
 			Connection conn = MySqlConnection.getConnection();
-//			DBManager.updateQuery(conn,
-//					"CREATE TABLE IF NOT EXISTS ppl (id SERIAL PRIMARY KEY, name TEXT NOT NULL, profession TEXT NOT NULL)");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis', 'Student')");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis', 'Trainee')");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis', 'Systemutvecklare')");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Bengt', 'IT-Aarkitekt');");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Calle', 'Systemutvecklare');");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Mona', 'Testare');");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Frida', 'Krav-analytiker');");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Solveig', 'Teamledare');");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Mikael', 'Enhetschef');");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Christina', 'General direktör');");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Jan', 'Överste direktör');");
-//			DBManager.updateQuery(conn,
-//					"INSERT INTO ppl(name, profession) VALUES('Liselotte', 'Systemutvecklare / handledare');");
-//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Kent', 'Linux tekniker');");
+			dbmanager.updateQuery(conn, "DROP TABLE ppl");
+			dbmanager.updateQuery(conn,
+					"CREATE TABLE IF NOT EXISTS ppl (id SERIAL PRIMARY KEY, name TEXT NOT NULL, profession TEXT NOT NULL)");
+			dbmanager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis', 'Student')");
+			dbmanager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis', 'Trainee')");
+			dbmanager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis', 'Systemutvecklare')");
+			dbmanager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Bengt', 'IT-Aarkitekt');");
+			dbmanager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Calle', 'Systemutvecklare');");
+			dbmanager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Mona', 'Testare');");
+			dbmanager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Frida', 'Krav-analytiker');");
+			dbmanager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Solveig', 'Teamledare');");
+			dbmanager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Mikael', 'Enhetschef');");
+			dbmanager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Christina', 'General direktör');");
+			dbmanager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Jan', 'Överste direktör');");
+			dbmanager.updateQuery(conn,
+					"INSERT INTO ppl(name, profession) VALUES('Liselotte', 'Systemutvecklare / handledare');");
+			dbmanager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Kent', 'Linux tekniker');");
 			output = dbmanager.selectQuery("SELECT * FROM ppl");
 			model.addAttribute("users", output);
 			return "db";
@@ -61,23 +70,14 @@ public class DemoApplication {
 	}
 
 	@RequestMapping("/all")
-	public String all(Model model) throws SQLException, URISyntaxException {
-		output = dbmanager.selectQuery("SELECT * FROM ppl");
-		model.addAttribute("users", output);
-		return "db";
+	public ArrayList<User> all(Model model) throws SQLException, URISyntaxException {
+		return output = db_RESTService.getAll();
+//		model.addAttribute("users", output);
+//		return "db";
 	}
 	
-	@PostMapping("/all")
-	public String TMDBSearchSubmit(@ModelAttribute WebManager search) throws IOException, SQLException, URISyntaxException {
-		System.out.println("title: " + search.getStr());
-		return "db";
-	}
+
 	
-//    @PostMapping("/calculator")
-//    public String calculatorSubmit(@ModelAttribute Calculator   calculator) {
-//      System.out.println("input: " + calculator.getInput() + " output: " + calculator.getOutput());
-//      return "calculator_result";
-//    }
 
 //
 //	@RequestMapping("/post")
@@ -106,13 +106,6 @@ public class DemoApplication {
 		return "db";
 	}
 
-	@RequestMapping("/")
-	@ResponseBody
-	ModelAndView index() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("index");
-		return modelAndView;
-	}
 
 	public static void main(String[] args) {
 

@@ -41,7 +41,7 @@ public class DBManager {
 	}
 
 
-	public static void updateQuery(Connection c, String s) throws SQLException {
+	public void updateQuery(Connection c, String s) throws SQLException {
 		Statement stmt = c.createStatement();
 		stmt.executeUpdate(s);
 	}
