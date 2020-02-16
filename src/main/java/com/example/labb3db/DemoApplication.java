@@ -40,11 +40,9 @@ import com.example.entity.User;
 @Controller
 @SpringBootApplication
 public class DemoApplication {
-	ProcessorOLD proceccor = new ProcessorOLD();
+	DB_RESTService db_RESTService = new DB_RESTService();
+	
 	DBManager dbmanager = new DBManager();
-
-
-	ProcessorOLD processor = new ProcessorOLD();
 	ArrayList<User> output;
 
 	@RequestMapping("/db")
@@ -53,51 +51,33 @@ public class DemoApplication {
 		ArrayList<User> output = new ArrayList<User>();
 		try {
 			Connection conn = MySqlConnection.getConnection();
-			DBManager.updateQuery(conn,
-					"CREATE TABLE IF NOT EXISTS ppl (id SERIAL PRIMARY KEY, name TEXT NOT NULL, profession TEXT NOT NULL)");
-			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis', 'Student')");
-			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis', 'Trainee')");
-			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis', 'Systemutvecklare')");
-			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Bengt', 'IT-Aarkitekt');");
-			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Calle', 'Systemutvecklare');");
-			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Mona', 'Testare');");
-			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Frida', 'Krav-analytiker');");
-			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Solveig', 'Teamledare');");
-			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Mikael', 'Enhetschef');");
-			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Christina', 'General direktör');");
-			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Jan', 'Överste direktör');");
-			DBManager.updateQuery(conn,
-					"INSERT INTO ppl(name, profession) VALUES('Liselotte', 'Systemutvecklare / handledare');");
-			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Kent', 'Linux tekniker');");
-//			String output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
+//			DBManager.updateQuery(conn,
+//					"CREATE TABLE IF NOT EXISTS ppl (id SERIAL PRIMARY KEY, name TEXT NOT NULL, profession TEXT NOT NULL)");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis', 'Student')");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis', 'Trainee')");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Dennis', 'Systemutvecklare')");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Bengt', 'IT-Aarkitekt');");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Calle', 'Systemutvecklare');");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Mona', 'Testare');");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Frida', 'Krav-analytiker');");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Solveig', 'Teamledare');");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Mikael', 'Enhetschef');");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Christina', 'General direktör');");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Jan', 'Överste direktör');");
+//			DBManager.updateQuery(conn,
+//					"INSERT INTO ppl(name, profession) VALUES('Liselotte', 'Systemutvecklare / handledare');");
+//			DBManager.updateQuery(conn, "INSERT INTO ppl(name, profession) VALUES('Kent', 'Linux tekniker');");
 			output = dbmanager.selectQuery("SELECT * FROM ppl");
-//			output = DBManager.selectQuery(conn, "SELECT * FROM ppl");
-
-//			DBManager.updateQuery(conn, "drop table ppl"); // ta bort alla rader
 			model.addAttribute("users", output);
 			return "db";
-
-//			return output;
-
 		} catch (Exception e) {
 			return e.getMessage();
 		}
 	}
 	
-	@GetMapping("/test/{name}")
-	public Response test(@PathParam("name") String name) throws SQLException, URISyntaxException {
-		ArrayList<User> output = new ArrayList<User>();
-		Connection conn = MySqlConnection.getConnection();
-//		output = DBManager.selectQuery(conn, "SELECT * FROM ppl WHERE Name='" + name + "'");
-		output = dbmanager.selectQuery("SELECT * FROM ppl");
-
-		ResponseBuilder builder = Response.ok(output);
-	    
-	    return builder.build();
-	}
 	@RequestMapping("/users")
 	String DBDeletes(Model model) throws URISyntaxException, SQLException {
-		output = processor.getUsers();
+		output = db_RESTService.getAll();
 		model.addAttribute("users", output);
 		return "db";
 	}
