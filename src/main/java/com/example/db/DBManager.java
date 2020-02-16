@@ -40,10 +40,6 @@ public class DBManager {
 		return json;
 	}
 
-//	public static Connection getConnection() throws URISyntaxException, SQLException {
-//		String dbUrl = System.getenv("JDBC_DATABASE_URL");
-//		return DriverManager.getConnection(dbUrl);
-//	}
 
 	public static void updateQuery(Connection c, String s) throws SQLException {
 		Statement stmt = c.createStatement();

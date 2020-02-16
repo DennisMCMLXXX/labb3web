@@ -12,12 +12,14 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -41,9 +43,12 @@ import com.example.entity.User;
 @SpringBootApplication
 public class DemoApplication {
 	DB_RESTService db_RESTService = new DB_RESTService();
-	
+
 	DBManager dbmanager = new DBManager();
 	ArrayList<User> output;
+
+	@Autowired
+	DB_RESTService db_restservice;
 
 	@RequestMapping("/db")
 //	@ResponseBody
@@ -74,56 +79,34 @@ public class DemoApplication {
 			return e.getMessage();
 		}
 	}
-	
-	@RequestMapping("/users")
-	String DBDeletes(Model model) throws URISyntaxException, SQLException {
-		output = db_RESTService.getAll();
-		model.addAttribute("users", output);
+
+	@RequestMapping("/add/{name}/{profession}")
+	String add(Model model, @QueryParam("name") String name, @QueryParam("profession") String profession)
+			throws URISyntaxException, SQLException {
+		String outputString = db_RESTService.addUser(name, profession);
+		model.addAttribute("users", outputString);
 		return "db";
 	}
 
-	@RequestMapping("/DBDeletes/{name}")
-	String DBDeletes(Model model, @PathVariable("name") String name) throws URISyntaxException, SQLException {
-		ArrayList<User> output = new ArrayList<User>();
-		Connection conn = MySqlConnection.getConnection();
-		output = dbmanager.selectQuery("SELECT * FROM ppl WHERE Name='" + name + "'");
-		model.addAttribute("users", output);
-
-		return "db_plain";
-	}
-	@GET
-	@Path("/users/{idnumber}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<User> getUserByidnumber(@PathParam("idnumber") int idnumber) throws SQLException, URISyntaxException {
-		String dBName = "labb2";
-//		if (sqlHandler.getUsers(dBName, idnumber)) {
-//			return Processor.getUserList();
-//		}
-		return null;
-	}
-	@GetMapping("/DBDelete")
-	String DBDelete(Model model) throws URISyntaxException, SQLException {
-		model.addAttribute("DBDelete", new DBManager());
-		return "delete_form";
-	}
-
-	@PostMapping("/DBDelete")
-	public String DBDeleteSubmit(@ModelAttribute DBManager search)
-			throws IOException, URISyntaxException, SQLException {
-		System.out.println(search.getDBDelete());
+	@RequestMapping("/delete/{id}")
+	String DBDelete(Model model, @PathVariable("id") int id) throws URISyntaxException, SQLException {
+		String outputString = db_RESTService.deleteUser(id);
+		model.addAttribute("users", outputString);
 		return "db";
 	}
 
-	@GetMapping("/DBAdd")
-	String alldb(Model model) throws URISyntaxException, SQLException {
-		model.addAttribute("DBAdd", new DBManager());
-		return "add_form";
+	@RequestMapping("/post")
+	public String DBAddSubmit(@ModelAttribute DBManager search) throws IOException, SQLException, URISyntaxException {
+//		System.out.println(search.getJson());
+		db_restservice.getAll();
+		return "db";
 	}
 
-	@PostMapping("/DBAdd")
-	public String DBAddSubmit(@ModelAttribute DBManager search) throws IOException {
-		System.out.println(search.getJson());
-		return "db";
+	@GetMapping("/show")
+	public String DBShow(Model model, @ModelAttribute DBManager search) {
+		model.addAttribute("WebManager", new WebManager());
+//		System.out.println(search.);
+		return "search_form";
 	}
 
 	@GetMapping("/DBSearch")
