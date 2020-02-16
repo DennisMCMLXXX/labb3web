@@ -79,13 +79,13 @@ public class DemoApplication {
 //      return "calculator_result";
 //    }
 
-
-	@RequestMapping("/post")
-	public ArrayList<User> DBAddSubmit(@ModelAttribute DBManager search) throws IOException, SQLException, URISyntaxException {
-//		System.out.println(search.getJson());
-		db_restservice.getAll();
-		return db_restservice.getAll();
-	}
+//
+//	@RequestMapping("/post")
+//	public ArrayList<User> DBAddSubmit(@ModelAttribute DBManager search) throws IOException, SQLException, URISyntaxException {
+////		System.out.println(search.getJson());
+//		db_restservice.getAll();
+//		return db_restservice.getAll();
+//	}
 
 	@GetMapping("/show")
 	public String DBShow(Model model, @ModelAttribute DBManager search) {
