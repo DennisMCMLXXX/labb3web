@@ -75,21 +75,21 @@ public class DB_RESTService {
 		return output;
 	}
 
-	@GetMapping("/users/i/{id}")
-//	@Produces (MediaType.APPLICATION_JSON)
-	List<User> getUserByidnumberorg(@PathVariable("id") int id) throws SQLException, URISyntaxException {
-		if (processorOLD.getUsers(id)) {
-			return ProcessorOLD.getUserList();
-		}
-		return null;
-	}
-
-	@GetMapping("/users/idd/{id}")
-//	@Produces (MediaType.APPLICATION_JSON)
-	JSONObject getUserByidnumber2(@PathVariable("id") int id) throws SQLException, URISyntaxException {
-		if (processorOLD.getUsers(id)) {
-			return ProcessorOLD.getUserList3();
-		}
-		return null;
-	}
+//	@GetMapping("/users/i/{id}")
+////	@Produces (MediaType.APPLICATION_JSON)
+//	List<User> getUserByidnumberorg(@PathVariable("id") int id) throws SQLException, URISyntaxException {
+//		if (processorOLD.getUsers(id)) {
+//			return ProcessorOLD.getUserList();
+//		}
+//		return null;
+//	}
+//
+//	@GetMapping("/users/idd/{id}")
+////	@Produces (MediaType.APPLICATION_JSON)
+//	JSONObject getUserByidnumber2(@PathVariable("id") int id) throws SQLException, URISyntaxException {
+//		if (processorOLD.getUsers(id)) {
+//			return ProcessorOLD.getUserList3();
+//		}
+//		return null;
+//	}
 }
