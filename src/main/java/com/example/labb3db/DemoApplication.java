@@ -73,7 +73,7 @@ public class DemoApplication {
 	public String all(Model model) throws SQLException, URISyntaxException {
 		output = db_RESTService.getAll();
 		model.addAttribute("users", output);
-		return "db_plain";
+		return "db";
 	}
 	
 
