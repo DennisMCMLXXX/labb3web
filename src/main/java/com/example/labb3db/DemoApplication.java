@@ -76,37 +76,6 @@ public class DemoApplication {
 		return "db";
 	}
 	
-
-	
-
-//
-//	@RequestMapping("/post")
-//	public ArrayList<User> DBAddSubmit(@ModelAttribute DBManager search) throws IOException, SQLException, URISyntaxException {
-////		System.out.println(search.getJson());
-//		db_restservice.getAll();
-//		return db_restservice.getAll();
-//	}
-
-	@GetMapping("/show")
-	public String DBShow(Model model, @ModelAttribute DBManager search) {
-		model.addAttribute("WebManager", new WebManager());
-//		System.out.println(search.);
-		return "search_form";
-	}
-
-	@GetMapping("/DBSearch")
-	public String DBSearch(Model model) {
-		model.addAttribute("DBSearch", new DBManager());
-		return "search_form";
-	}
-
-	@PostMapping("/DBSearch")
-	public String DBSearchSubmit(@ModelAttribute DBManager search) throws IOException {
-		System.out.println(search.getJson());
-		return "db";
-	}
-
-
 	public static void main(String[] args) {
 
 		SpringApplication.run(DemoApplication.class, args);
