@@ -70,10 +70,10 @@ public class DemoApplication {
 	}
 
 	@RequestMapping("/all")
-	public ArrayList<User> all(Model model) throws SQLException, URISyntaxException {
-		return output = db_RESTService.getAll();
-//		model.addAttribute("users", output);
-//		return "db";
+	public String all(Model model) throws SQLException, URISyntaxException {
+		output = db_RESTService.getAll();
+		model.addAttribute("users", output);
+		return "db";
 	}
 	
 
