@@ -96,10 +96,10 @@ public class DemoApplication {
 	}
 
 	@RequestMapping("/post")
-	public String DBAddSubmit(@ModelAttribute DBManager search) throws IOException, SQLException, URISyntaxException {
+	public ArrayList<User> DBAddSubmit(@ModelAttribute DBManager search) throws IOException, SQLException, URISyntaxException {
 //		System.out.println(search.getJson());
 		db_restservice.getAll();
-		return "db";
+		return db_restservice.getAll();
 	}
 
 	@GetMapping("/show")
