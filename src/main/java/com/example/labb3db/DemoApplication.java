@@ -80,20 +80,24 @@ public class DemoApplication {
 		}
 	}
 
-	@RequestMapping("/add/{name}/{profession}")
-	String add(Model model, @QueryParam("name") String name, @QueryParam("profession") String profession)
-			throws URISyntaxException, SQLException {
-		String outputString = db_RESTService.addUser(name, profession);
-		model.addAttribute("users", outputString);
+	@GetMapping("/all")
+	public String TMDBSearch(Model model) {
+		model.addAttribute("all", new WebManager());
+		return "search_form";
+	}
+	
+	@PostMapping("/all")
+	public String TMDBSearchSubmit(@ModelAttribute WebManager search) throws IOException, SQLException, URISyntaxException {
+		System.out.println("title: " + search.getStr());
 		return "db";
 	}
+	
+//    @PostMapping("/calculator")
+//    public String calculatorSubmit(@ModelAttribute Calculator   calculator) {
+//      System.out.println("input: " + calculator.getInput() + " output: " + calculator.getOutput());
+//      return "calculator_result";
+//    }
 
-	@RequestMapping("/delete/{id}")
-	String DBDelete(Model model, @PathVariable("id") int id) throws URISyntaxException, SQLException {
-		String outputString = db_RESTService.deleteUser(id);
-		model.addAttribute("users", outputString);
-		return "db";
-	}
 
 	@RequestMapping("/post")
 	public ArrayList<User> DBAddSubmit(@ModelAttribute DBManager search) throws IOException, SQLException, URISyntaxException {
